@@ -240,9 +240,9 @@ export default function NavbarComponent() {
     const userFallback = userName ? userName.charAt(0).toUpperCase() : "?";
     const myId = authState.user?.userId?._id;
     const isMyOnline = myId
-        ? (onlineStatuses && onlineStatuses[myId]?.isOnline) ??
+        ? ((onlineStatuses && onlineStatuses[myId]?.isOnline) ??
           authState.user?.userId?.isOnline ??
-          true
+          true)
         : false;
 
     const navItems = [
@@ -552,7 +552,7 @@ export default function NavbarComponent() {
                         .filter(
                             (item) =>
                                 item.path !== "/notifications" &&
-                                item.path !== "/messaging"
+                                item.path !== "/messaging",
                         )
                         .map((item) => (
                             <div

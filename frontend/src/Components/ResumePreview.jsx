@@ -1,88 +1,89 @@
-import React from "react";
-import ClassicTemplate from "./templates/ClassicTemplate";
-import ModernTemplate from "./templates/ModernTemplate";
-import MinimalTemplate from "./templates/MinimalTemplate";
-import MinimalImageTemplate from "./templates/MinimalImageTemplate";
-import LpuTemplate from "./templates/LpuTemplate";
+import React, { useRef, useEffect, useState } from "react";
+import GeneralTemplate from "./templates/GeneralTemplate";
+import SpecializedTemplate from "./templates/SpecializedTemplate";
 
-const ResumePreview = ({ data, template, accentColor }) => {
+// "general"     → LPU blue-header (user's main format)
+// "specialized" → Centered black-header Calibri
+const ResumePreview = ({ data, template, accentColor, fontSize = "default", printRef }) => {
+    const wrapperRef = useRef(null);
+    const [scale, setScale] = useState(1);
+
+    // A4 at 96 DPI = 794 × 1123px  (210mm × 297mm)
+    const A4_W = 794;
+    const A4_H = 1123;
+
+    useEffect(() => {
+        const update = () => {
+            if (wrapperRef.current) {
+                const w = wrapperRef.current.offsetWidth;
+                setScale(w / A4_W);
+            }
+        };
+        update();
+        const ro = new ResizeObserver(update);
+        if (wrapperRef.current) ro.observe(wrapperRef.current);
+        return () => ro.disconnect();
+    }, []);
+
     const renderTemplate = () => {
         switch (template) {
-            case "lpu":
-                return <LpuTemplate data={data} accentColor={accentColor} />;
-            case "modern":
-                return <ModernTemplate data={data} accentColor={accentColor} />;
-            case "minimal":
-                return (
-                    <MinimalTemplate data={data} accentColor={accentColor} />
-                );
-            case "minimal-image":
-                return (
-                    <MinimalImageTemplate
-                        data={data}
-                        accentColor={accentColor}
-                    />
-                );
+            case "specialized":
+                return <SpecializedTemplate data={data} accentColor={accentColor} fontSize={fontSize} />;
+            case "general":
             default:
-                return (
-                    <ClassicTemplate data={data} accentColor={accentColor} />
-                );
+                return <GeneralTemplate data={data} accentColor={accentColor} fontSize={fontSize} />;
         }
     };
 
     return (
-        <div className="w-full flex justify-center bg-gray-50/50 py-8 print:p-0 print:bg-white print:block">
-            {/* A4 Container */}
+        <>
+            {/* ---- VISIBLE SCALED PREVIEW ---- */}
             <div
-                id="resume-preview"
-                className="bg-white shadow-xl w-[210mm] min-h-[297mm] origin-top print:shadow-none print:w-full print:h-full print:absolute print:top-0 print:left-0 print:m-0"
+                ref={wrapperRef}
+                style={{
+                    width: "100%",
+                    height: `${A4_H * scale}px`,
+                    position: "relative",
+                    overflow: "hidden",
+                    borderRadius: "4px",
+                    boxShadow: "0 4px 24px rgba(0,0,0,0.18)",
+                }}
+            >
+                <div
+                    id="resume-preview"
+                    style={{
+                        width: `${A4_W}px`,
+                        height: `${A4_H}px`,
+                        transformOrigin: "top left",
+                        transform: `scale(${scale})`,
+                        backgroundColor: "#fff",
+                        overflow: "hidden",
+                    }}
+                >
+                    {renderTemplate()}
+                </div>
+            </div>
+
+            {/* ---- HIDDEN FULL-SIZE TARGET FOR PDF CAPTURE ----
+                794px wide, natural height (NO overflow clip).
+                html2canvas captures this at full resolution.    */}
+            <div
+                ref={printRef}
+                aria-hidden="true"
+                style={{
+                    position: "fixed",
+                    top: 0,
+                    left: "-9999px",
+                    width: `${A4_W}px`,
+                    // No fixed height — let content flow naturally so nothing is clipped
+                    backgroundColor: "#fff",
+                    pointerEvents: "none",
+                    zIndex: -1,
+                }}
             >
                 {renderTemplate()}
             </div>
-
-            {/* --- CRITICAL FIX FOR BLANK PDF --- */}
-            <style jsx global>{`
-                @media print {
-                    /* 1. Reset Page & Body */
-                    @page {
-                        size: auto;
-                        margin: 0mm;
-                    }
-                    html, body {
-                        height: auto !important;
-                        overflow: visible !important;
-                        background: white !important;
-                        margin: 0 !important;
-                    }
-
-                    /* 2. Hide Everything by Default */
-                    body * {
-                        visibility: hidden;
-                    }
-
-                    /* 3. Force Visibility of Resume & Children */
-                    #resume-preview, #resume-preview * {
-                        visibility: visible !important;
-                    }
-
-                    /* 4. Position Resume on Top */
-                    #resume-preview {
-                        position: absolute !important;
-                        left: 0 !important;
-                        top: 0 !important;
-                        width: 100% !important;
-                        margin: 0 !important;
-                        padding: 0 !important;
-                        z-index: 99999; /* Top layer */
-                    }
-
-                    /* 5. Hide Navbar/Footer Explicitly (Just in case) */
-                    nav, footer, header, .Toaster, button {
-                        display: none !important;
-                    }
-                }
-            `}</style>
-        </div>
+        </>
     );
 };
 

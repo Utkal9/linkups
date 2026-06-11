@@ -11,7 +11,8 @@ import { useSelector } from "react-redux";
 import clientServer from "@/config";
 import toast, { Toaster } from "react-hot-toast";
 
-const ExperienceForm = ({ data, onChange }) => {
+const ExperienceForm = ({ data, onChange, template = "general" }) => {
+    const isSpecialized = template === "specialized";
     const { token } = useSelector((state) => state.auth);
     const [generatingIndex, setGeneratingIndex] = useState(-1);
 
@@ -25,6 +26,8 @@ const ExperienceForm = ({ data, onChange }) => {
                 end_date: "",
                 description: "",
                 location: "",
+                tech_stack: "",
+                cert_link: "",
                 is_current: false,
             },
         ]);
@@ -60,8 +63,7 @@ const ExperienceForm = ({ data, onChange }) => {
                     className="flex items-center gap-2 text-lg font-semibold"
                     style={{ color: "var(--text-primary)" }}
                 >
-                    {" "}
-                    Professional Experience{" "}
+                    {isSpecialized ? "Internship / Experience" : "Professional Experience"}
                 </h3>
                 <button
                     onClick={addExperience}
@@ -101,35 +103,30 @@ const ExperienceForm = ({ data, onChange }) => {
                         </button>
                     </div>
                     <div className="grid md:grid-cols-2 gap-4 mb-4">
+
+                        {/* ── Specialized: Position first (bold primary line in template) ── */}
+                        {isSpecialized && (
+                            <input
+                                value={experience.position}
+                                onChange={(e) => updateExperience(index, "position", e.target.value)}
+                                type="text"
+                                placeholder="Job Title (e.g. Web Development Intern)"
+                                className="w-full px-3 py-2 text-sm border rounded-lg focus:ring-2"
+                                style={{
+                                    backgroundColor: "var(--holo-bg)",
+                                    borderColor: "var(--holo-border)",
+                                    color: "var(--text-primary)",
+                                }}
+                            />
+                        )}
+
                         <input
                             value={experience.company}
-                            onChange={(e) =>
-                                updateExperience(
-                                    index,
-                                    "company",
-                                    e.target.value
-                                )
-                            }
+                            onChange={(e) => updateExperience(index, "company", e.target.value)}
                             type="text"
-                            placeholder="Company"
-                            className="w-full px-3 py-2 text-sm border rounded-lg focus:ring-2"
-                            style={{
-                                backgroundColor: "var(--holo-bg)",
-                                borderColor: "var(--holo-border)",
-                                color: "var(--text-primary)",
-                            }}
-                        />
-                        <input
-                            value={experience.position}
-                            onChange={(e) =>
-                                updateExperience(
-                                    index,
-                                    "position",
-                                    e.target.value
-                                )
-                            }
-                            type="text"
-                            placeholder="Job Title"
+                            placeholder={isSpecialized
+                                ? "Company (e.g. Vanillakart (Emvity Brushflicks Creative Hub Pvt. Ltd.))"
+                                : "Company"}
                             className="w-full px-3 py-2 text-sm border rounded-lg focus:ring-2"
                             style={{
                                 backgroundColor: "var(--holo-bg)",
@@ -138,19 +135,61 @@ const ExperienceForm = ({ data, onChange }) => {
                             }}
                         />
 
-                        {/* Location Input */}
+                        {/* ── General: Position after company ── */}
+                        {!isSpecialized && (
+                            <input
+                                value={experience.position}
+                                onChange={(e) => updateExperience(index, "position", e.target.value)}
+                                type="text"
+                                placeholder="Job Title / Role"
+                                className="w-full px-3 py-2 text-sm border rounded-lg focus:ring-2"
+                                style={{
+                                    backgroundColor: "var(--holo-bg)",
+                                    borderColor: "var(--holo-border)",
+                                    color: "var(--text-primary)",
+                                }}
+                            />
+                        )}
+
+                        {/* Location */}
                         <input
-                            value={experience.location}
+                            value={experience.location || ""}
+                            onChange={(e) => updateExperience(index, "location", e.target.value)}
+                            type="text"
+                            placeholder="Location (e.g. Remote / Bhubaneswar)"
+                            className="w-full px-3 py-2 text-sm border rounded-lg focus:ring-2 md:col-span-2"
+                            style={{
+                                backgroundColor: "var(--holo-bg)",
+                                borderColor: "var(--holo-border)",
+                                color: "var(--text-primary)",
+                            }}
+                        />
+
+                        {/* Tech Stack */}
+                        <input
+                            value={experience.tech_stack || ""}
                             onChange={(e) =>
-                                updateExperience(
-                                    index,
-                                    "location",
-                                    e.target.value
-                                )
+                                updateExperience(index, "tech_stack", e.target.value)
                             }
                             type="text"
-                            placeholder="Location (e.g. Remote, India)"
-                            className="w-full px-3 py-2 text-sm border rounded-lg focus:ring-2 md:col-span-2"
+                            placeholder="Tech Stack (e.g. MERN Stack, WordPress)"
+                            className="w-full px-3 py-2 text-sm border rounded-lg focus:ring-2"
+                            style={{
+                                backgroundColor: "var(--holo-bg)",
+                                borderColor: "var(--holo-border)",
+                                color: "var(--text-primary)",
+                            }}
+                        />
+
+                        {/* Certificate Link */}
+                        <input
+                            value={experience.cert_link || ""}
+                            onChange={(e) =>
+                                updateExperience(index, "cert_link", e.target.value)
+                            }
+                            type="url"
+                            placeholder="Certificate Link (URL)"
+                            className="w-full px-3 py-2 text-sm border rounded-lg focus:ring-2"
                             style={{
                                 backgroundColor: "var(--holo-bg)",
                                 borderColor: "var(--holo-border)",

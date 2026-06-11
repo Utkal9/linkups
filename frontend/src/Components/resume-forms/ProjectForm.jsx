@@ -84,7 +84,8 @@ const CustomAlertModal = ({ isOpen, message, onClose }) => {
     );
 };
 
-const ProjectForm = ({ data, onChange }) => {
+const ProjectForm = ({ data, onChange, template = "general" }) => {
+    const isGeneral = template === "general";
     const [loadingIndex, setLoadingIndex] = useState(null);
     const [alertState, setAlertState] = useState({
         isOpen: false,
@@ -99,6 +100,37 @@ const ProjectForm = ({ data, onChange }) => {
         setAlertState({ ...alertState, isOpen: false });
     };
 
+    // Format "2025-09" → "Sep' 25"
+    const formatMonthYear = (dateStr) => {
+        if (!dateStr) return "";
+        const parts = dateStr.split("-");
+        if (parts.length < 2) return dateStr;
+        const [year, month] = parts;
+        const monthAbbr = new Date(parseInt(year), parseInt(month) - 1).toLocaleString(
+            "en-US",
+            { month: "short" }
+        );
+        return `${monthAbbr}' ${year.slice(2)}`;
+    };
+
+    const updateProjectDates = (index, field, value) => {
+        const updated = [...data];
+        updated[index] = { ...updated[index], [field]: value };
+        // Auto-compute duration string from start + end dates
+        const start = field === "proj_start" ? value : updated[index].proj_start || "";
+        const end = field === "proj_end" ? value : updated[index].proj_end || "";
+        const startFmt = formatMonthYear(start);
+        const endFmt = formatMonthYear(end);
+        if (startFmt && endFmt) {
+            updated[index].duration = `${startFmt} – ${endFmt}`;
+        } else if (startFmt) {
+            updated[index].duration = startFmt;
+        } else if (endFmt) {
+            updated[index].duration = endFmt;
+        }
+        onChange(updated);
+    };
+
     const addProject = () =>
         onChange([
             ...data,
@@ -106,9 +138,12 @@ const ProjectForm = ({ data, onChange }) => {
                 name: "",
                 type: "",
                 description: "",
+                tech_stack: "",
                 link: "",
                 live_link: "",
                 duration: "",
+                proj_start: "",
+                proj_end: "",
             },
         ]);
 
@@ -241,22 +276,25 @@ const ProjectForm = ({ data, onChange }) => {
                             }}
                         />
 
-                        <input
-                            value={project.type || ""}
-                            onChange={(e) =>
-                                updateProject(index, "type", e.target.value)
-                            }
-                            placeholder="Tech Stack / Type"
-                            className="p-2 text-sm border rounded outline-none focus:ring-2"
-                            style={{
-                                backgroundColor: "var(--holo-bg)",
-                                borderColor: "var(--holo-border)",
-                                color: "var(--text-primary)",
-                            }}
-                        />
+                        {/* General only: shows as second label on the project header line */}
+                        {isGeneral && (
+                            <input
+                                value={project.type || ""}
+                                onChange={(e) =>
+                                    updateProject(index, "type", e.target.value)
+                                }
+                                placeholder="Project Type (e.g. Personal, Team)"
+                                className="p-2 text-sm border rounded outline-none focus:ring-2"
+                                style={{
+                                    backgroundColor: "var(--holo-bg)",
+                                    borderColor: "var(--holo-border)",
+                                    color: "var(--text-primary)",
+                                }}
+                            />
+                        )}
                     </div>
 
-                    <div className="grid md:grid-cols-3 gap-4">
+                    <div className="grid md:grid-cols-2 gap-4">
                         <input
                             value={project.link || ""}
                             onChange={(e) =>
@@ -274,11 +312,7 @@ const ProjectForm = ({ data, onChange }) => {
                         <input
                             value={project.live_link || ""}
                             onChange={(e) =>
-                                updateProject(
-                                    index,
-                                    "live_link",
-                                    e.target.value
-                                )
+                                updateProject(index, "live_link", e.target.value)
                             }
                             placeholder="Live Demo Link"
                             className="p-2 text-sm border rounded outline-none focus:ring-2"
@@ -288,26 +322,55 @@ const ProjectForm = ({ data, onChange }) => {
                                 color: "var(--text-primary)",
                             }}
                         />
+                    </div>
 
-                        <div className="relative">
-                            <Calendar className="absolute left-3 top-2.5 w-4 h-4 text-gray-400 pointer-events-none" />
-                            <input
-                                value={project.duration || ""}
-                                onChange={(e) =>
-                                    updateProject(
-                                        index,
-                                        "duration",
-                                        e.target.value
-                                    )
-                                }
-                                placeholder="Duration (e.g. Sept 2025)"
-                                className="w-full pl-10 py-2 text-sm border rounded outline-none focus:ring-2"
-                                style={{
-                                    backgroundColor: "var(--holo-bg)",
-                                    borderColor: "var(--holo-border)",
-                                    color: "var(--text-primary)",
-                                }}
-                            />
+                    {/* Duration — two month pickers auto-formatting to "Sep' 25 – Nov' 25" */}
+                    <div>
+                        <label className="text-xs font-medium mb-1.5 block" style={{ color: "var(--text-secondary)" }}>
+                            Duration
+                            {project.duration && (
+                                <span className="ml-2 font-semibold" style={{ color: "var(--neon-teal)" }}>
+                                    {project.duration}
+                                </span>
+                            )}
+                        </label>
+                        <div className="grid grid-cols-2 gap-3">
+                            <div className="relative">
+                                <Calendar className="absolute left-3 top-2.5 w-4 h-4 text-gray-400 pointer-events-none" />
+                                <input
+                                    type="month"
+                                    value={project.proj_start || ""}
+                                    onChange={(e) =>
+                                        updateProjectDates(index, "proj_start", e.target.value)
+                                    }
+                                    className="w-full pl-10 py-2 text-sm border rounded outline-none focus:ring-2"
+                                    style={{
+                                        backgroundColor: "var(--holo-bg)",
+                                        borderColor: "var(--holo-border)",
+                                        color: "var(--text-primary)",
+                                    }}
+                                    title="Start Month"
+                                />
+                                <span className="text-xs block mt-0.5 pl-1" style={{ color: "var(--text-secondary)" }}>Start Month</span>
+                            </div>
+                            <div className="relative">
+                                <Calendar className="absolute left-3 top-2.5 w-4 h-4 text-gray-400 pointer-events-none" />
+                                <input
+                                    type="month"
+                                    value={project.proj_end || ""}
+                                    onChange={(e) =>
+                                        updateProjectDates(index, "proj_end", e.target.value)
+                                    }
+                                    className="w-full pl-10 py-2 text-sm border rounded outline-none focus:ring-2"
+                                    style={{
+                                        backgroundColor: "var(--holo-bg)",
+                                        borderColor: "var(--holo-border)",
+                                        color: "var(--text-primary)",
+                                    }}
+                                    title="End Month"
+                                />
+                                <span className="text-xs block mt-0.5 pl-1" style={{ color: "var(--text-secondary)" }}>End Month</span>
+                            </div>
                         </div>
                     </div>
 
@@ -374,14 +437,25 @@ const ProjectForm = ({ data, onChange }) => {
                             rows={4}
                             value={project.description || ""}
                             onChange={(e) =>
-                                updateProject(
-                                    index,
-                                    "description",
-                                    e.target.value
-                                )
+                                updateProject(index, "description", e.target.value)
                             }
-                            placeholder="Description (Bullet points)"
+                            placeholder="Description (Bullet points — one per line)"
                             className="w-full p-2 text-sm border rounded resize-none outline-none focus:ring-2"
+                            style={{
+                                backgroundColor: "var(--holo-bg)",
+                                borderColor: "var(--holo-border)",
+                                color: "var(--text-primary)",
+                            }}
+                        />
+
+                        {/* Tech Stack — shows as 'Tech Stack: ...' line in Specialized template */}
+                        <input
+                            value={project.tech_stack || ""}
+                            onChange={(e) =>
+                                updateProject(index, "tech_stack", e.target.value)
+                            }
+                            placeholder="Tech Stack (e.g. React.js, Node.js, MongoDB)"
+                            className="w-full p-2 text-sm border rounded outline-none focus:ring-2"
                             style={{
                                 backgroundColor: "var(--holo-bg)",
                                 borderColor: "var(--holo-border)",

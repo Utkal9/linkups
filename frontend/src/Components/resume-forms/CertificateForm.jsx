@@ -2,7 +2,7 @@ import { Plus, Trash2, Award, Calendar } from "lucide-react";
 import React from "react";
 
 const CertificateForm = ({ data, onChange }) => {
-    const addCert = () => onChange([...data, { name: "", link: "", date: "" }]);
+    const addCert = () => onChange([...data, { name: "", issuer: "", link: "", date: "" }]);
 
     const removeCert = (index) => onChange(data.filter((_, i) => i !== index));
 
@@ -73,8 +73,22 @@ const CertificateForm = ({ data, onChange }) => {
                             }}
                         />
 
+                        <input
+                            value={cert.issuer || ""}
+                            onChange={(e) =>
+                                updateCert(index, "issuer", e.target.value)
+                            }
+                            placeholder="Issuer / Provider (e.g. NPTEL, Google)"
+                            className="p-2 text-sm border rounded outline-none focus:ring-2"
+                            style={{
+                                backgroundColor: "var(--holo-bg)",
+                                borderColor: "var(--holo-border)",
+                                color: "var(--text-primary)",
+                            }}
+                        />
+
                         {/* Advanced Calendar Wrapper for Date */}
-                        <div className="relative">
+                        <div className="relative md:col-span-1">
                             <Calendar className="absolute left-3 top-2.5 w-4 h-4 text-gray-400 pointer-events-none" />
                             <input
                                 type="text"

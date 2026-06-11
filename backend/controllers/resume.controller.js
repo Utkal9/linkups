@@ -173,6 +173,26 @@ export const getResumeById = async (req, res) => {
     }
 };
 
+// --- 3b. Get Public Resume (No Auth Required) ---
+export const getPublicResume = async (req, res) => {
+    try {
+        const { resumeId } = req.query;
+        const resume = await Resume.findById(resumeId);
+        
+        if (!resume) {
+            return res.status(404).json({ message: "Resume not found" });
+        }
+        
+        if (!resume.public) {
+            return res.status(403).json({ message: "This resume is private" });
+        }
+
+        return res.json({ resume });
+    } catch (error) {
+        return res.status(500).json({ message: "Invalid Resume ID" });
+    }
+};
+
 // --- 4. Delete Resume ---
 export const deleteResume = async (req, res) => {
     try {

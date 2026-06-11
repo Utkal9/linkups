@@ -3,6 +3,7 @@ import {
     createResume,
     getAllResumes,
     getResumeById,
+    getPublicResume,
     updateResume,
     deleteResume,
 } from "../controllers/resume.controller.js";
@@ -20,6 +21,7 @@ const router = Router();
 router.post("/resume/create", createResume);
 router.get("/resume/all", getAllResumes);
 router.get("/resume/get", getResumeById);
+router.get("/resume/public", getPublicResume);
 router.post("/resume/delete", deleteResume);
 router.post("/resume/update", upload.single("image"), updateResume);
 

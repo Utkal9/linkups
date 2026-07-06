@@ -111,27 +111,25 @@ Create a `.env` file in the `backend` folder with the following variables:
 ```env
 PORT=9090
 MONGO_URL=your_mongodb_connection_string
-SESSION_SECRET=your_random_secret_string
+SESSION_SECRET=your_random_secret
 
-# URLs (Crucial for CORS and Email Links)
-# Use http://localhost:3000 for local dev, or your Render URL for production
+# AI Configuration
+GEMINI_API_KEY=your_google_gemini_api_key
+
+# URLs
 FRONTEND_URL=http://localhost:3000
 BACKEND_URL=http://localhost:9090
 
-# Cloudinary Configuration (Images/Videos)
+# Cloudinary
 CLOUDINARY_CLOUD_NAME=your_cloud_name
 CLOUDINARY_API_KEY=your_api_key
 CLOUDINARY_API_SECRET=your_api_secret
 
-# Email Service (Brevo)
-BREVO_API_KEY=your_brevo_api_key
-EMAIL_USER=your_verified_sender_email_in_brevo
-
-# OAuth (Optional)
-GOOGLE_CLIENT_ID=...
-GOOGLE_CLIENT_SECRET=...
-GITHUB_CLIENT_ID=...
-GITHUB_CLIENT_SECRET=...
+# OAuth (Passport)
+GOOGLE_CLIENT_ID=your_google_id
+GOOGLE_CLIENT_SECRET=your_google_secret
+GITHUB_CLIENT_ID=your_github_id
+GITHUB_CLIENT_SECRET=your_github_secret
 ```
 
 Start the server:
@@ -186,22 +184,27 @@ This project includes auto-generated API documentation using Swagger.
 ## 📂 Project Structure
 
 ```text
+Social_Media_like_LinkedIn-main/
 ├── backend/
-│   ├── config/         # DB, Cloudinary, Passport, Email Templates
-│   ├── controllers/    # Logic for User, Post, Messaging
-│   ├── models/         # Mongoose Schemas (User, Post, Message, etc.)
-│   ├── routes/         # API Routes (Swagger docs included here)
-│   └── server.js       # Entry point, Swagger config & Socket.io setup
+│   ├── config/             # Cloudinary, ImageKit, Passport, AI, Emails
+│   ├── controllers/        # AI, Messaging, Notifications, PDF, Posts, Resume, User
+│   ├── models/             # Mongoose schemas (User, Post, Profile, Resume, etc.)
+│   ├── routes/             # Express API routes
+│   ├── templates/          # HTML templates for PDF rendering
+│   ├── uploads/            # Temporary local file storage
+│   └── server.js           # Main backend entry point
 │
-├── frontend/
-│   ├── src/
-│   │   ├── Components/ # Reusable UI (Navbar, Footer, Modals)
-│   │   ├── config/     # Redux Store & Axios setup
-│   │   ├── context/    # Socket & Theme Contexts
-│   │   ├── layout/     # Layout wrappers (UserLayout, DashboardLayout)
-│   │   ├── pages/      # Next.js Pages (dashboard, profile, login, meet, etc.)
-│   │   └── styles/     # Global and module CSS files
-│   └── public/         # Static assets
+└── frontend/
+    ├── public/             # Static assets (Favicon, SVGs, Images)
+    ├── src/
+    │   ├── Components/     # UI Components (Navbar, Footer, Resume Builder Tools)
+    │   ├── config/         # Redux store, actions, and reducers
+    │   ├── context/        # Socket and Theme Context providers
+    │   ├── layout/         # DashboardLayout and UserLayout wrappers
+    │   ├── pages/          # Next.js Pages (Auth, Dashboard, Meet, Resume Builder, Profile)
+    │   └── styles/         # Global styles and CSS modules
+    ├── next.config.mjs     # Next.js configuration
+    └── tailwind.config.js  # Tailwind CSS configuration
 ```
 
 ## 🛡️ License

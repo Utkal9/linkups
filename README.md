@@ -68,19 +68,6 @@
 * Cloudinary Account
 * Google/GitHub OAuth Credentials (Optional but recommended)
 
-### 1. Backend Setup
-
-```bash
-# Navigate to backend
-cd backend
-
-# Install dependencies
-npm install
-
-# Start the server (Dev Mode)
-npm run dev
-```
-
 ## 📦 Installation & Setup
 
 To run this project locally, you need to set up both the **frontend** and **backend** environments.

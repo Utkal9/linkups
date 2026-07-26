@@ -1,84 +1,226 @@
 /* frontend/src/styles/globals.css */
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* ============================================================
+   LINKUPS DESIGN SYSTEM — v2.0
+   
+   Design Identity: Confident, career-focused, professional.
+   Built for students transitioning into professionals.
+   
+   Architecture Notes:
+   - Variable names are preserved for backward compatibility.
+   - Only values are updated. No component logic changes.
+   - New tokens are additive — they don't replace existing ones.
+   
+   Brand primary: Indigo (#4f46e5) — unified across both themes.
+   Heading font: Plus Jakarta Sans
+   Body font: Poppins (preserved)
+   ============================================================ */
+
+/* ============================================================
+   DARK MODE (DEFAULT)
+   Surface: Deep dark with slight warm-blue undertone.
+   Not pure black — "premium dark" not "hacker terminal."
+   ============================================================ */
 :root {
-    /* --- DEFAULT (DARK / HOLO MODE) --- */
-    --holo-bg: #020410;
-    --holo-panel: #0b0f2a;
-    --holo-glass: rgba(255, 255, 255, 0.03);
-    --holo-border: rgba(139, 92, 246, 0.4);
+    /* --- Surfaces --- */
+    --holo-bg: #0c0c14;                        /* Page background — deep dark, slightly warm */
+    --holo-panel: #14141f;                     /* Card / panel surface */
+    --holo-glass: rgba(255, 255, 255, 0.04);   /* Subtle glass overlay */
+    --holo-border: rgba(255, 255, 255, 0.08);  /* Neutral border — no purple tint */
+    --holo-border-subtle: rgba(255, 255, 255, 0.04);
 
-    /* Accents */
-    --neon-violet: #8b5cf6; /* Primary Action Color */
-    --neon-teal: #0fffc6; /* Secondary/Highlight Color */
-    --neon-blue: #3b82f6; /* Links/Info */
-    --neon-pink: #ec4899; /* Danger/Warnings */
+    /* --- Brand — Primary Indigo --- */
+    --neon-violet: #4f46e5;                    /* Primary brand: CTAs, active states, links */
+    --neon-violet-hover: #4338ca;              /* Hover state for primary */
+    --neon-violet-subtle: rgba(79, 70, 229, 0.12); /* Subtle background tint */
 
-    /* Text */
-    --text-primary: #f8fafc;
+    /* --- Interactive Accent --- */
+    --neon-teal: #818cf8;                      /* Secondary/interactive: lighter indigo */
+
+    /* --- Utility Colors --- */
+    --neon-blue: #60a5fa;                      /* Informational */
+    --neon-pink: #f87171;                      /* Error / destructive */
+
+    /* --- Semantic Colors --- */
+    --color-success: #10b981;
+    --color-success-subtle: rgba(16, 185, 129, 0.12);
+    --color-warning: #f59e0b;
+    --color-warning-subtle: rgba(245, 158, 11, 0.12);
+    --color-error: #f87171;
+    --color-error-subtle: rgba(248, 113, 113, 0.12);
+    --color-online: #22c55e;                   /* Online presence indicator — green is universal */
+
+    /* --- Text --- */
+    --text-primary: #f1f5f9;
     --text-secondary: #94a3b8;
+    --text-muted: #64748b;
 
-    /* Effects */
-    --glow-primary: 0 0 20px rgba(139, 92, 246, 0.5);
-    --glow-teal: 0 0 15px rgba(15, 255, 198, 0.4);
+    /* --- Effects (Restrained) --- */
+    --glow-primary: 0 0 24px rgba(79, 70, 229, 0.12);  /* Subtle — not neon */
+    --glow-teal: none;
     --glass-blur: blur(12px);
-    --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.3);
+
+    /* --- Shadow Elevation Scale ---
+       Level 1 (sm): Subtle lift — inline elements, small chips
+       Level 2 (md): Cards, panels — the standard card elevation
+       Level 3 (lg): Dropdowns, tooltips, floating elements
+       Level 4 (xl): Modals, overlays — highest elevation
+    */
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.3), 0 1px 3px rgba(0, 0, 0, 0.2);
+    --shadow-lg: 0 12px 28px rgba(0, 0, 0, 0.4), 0 4px 8px rgba(0, 0, 0, 0.2);
+    --shadow-xl: 0 24px 48px rgba(0, 0, 0, 0.5), 0 8px 16px rgba(0, 0, 0, 0.3);
+    --shadow-card: var(--shadow-md);           /* Alias — preserved for backward compatibility */
+
+    /* --- Geometry Tokens ---
+       Used as references in component modules.
+       Encourages consistency without enforcing it globally.
+    */
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 16px;
+    --radius-xl: 24px;
+    --radius-full: 9999px;
+
+    /* --- Motion Tokens ---
+       Fast:  micro-interactions (hover, focus ring)
+       Base:  state transitions (appear, collapse, toggle)
+       Slow:  page-level reveals, deliberate animations
+    */
+    --transition-fast: 150ms ease;
+    --transition-base: 250ms ease;
+    --transition-slow: 350ms ease;
 }
 
-/* --- LIGHT MODE (ORANGE & WHITE / LPU STYLE) --- */
+/* ============================================================
+   LIGHT MODE
+   Unified brand identity — same indigo primary as dark mode.
+   Clean, off-white surfaces. No orange.
+   ============================================================ */
 [data-theme="light"] {
-    /* Backgrounds: Clean White & Light Grey */
-    --holo-bg: #ffffff;
-    --holo-panel: #f3f4f6; /* Light grey for cards/sidebars */
-    --holo-glass: rgba(0, 0, 0, 0.02); /* Very subtle dark tint for depth */
-    --holo-border: #e5e7eb; /* Light Grey Border */
+    /* --- Surfaces --- */
+    --holo-bg: #f8fafc;                        /* Slightly off-white — not pure white */
+    --holo-panel: #ffffff;                     /* Card surface: white on light bg */
+    --holo-glass: rgba(0, 0, 0, 0.02);
+    --holo-border: #e2e8f0;                    /* Standard light mode border */
+    --holo-border-subtle: #f1f5f9;
 
-    /* Accents: Orange Brand Identity */
-    --neon-violet: #e85d04; /* Primary Orange (Replacing Violet) */
-    --neon-teal: #ea580c; /* Darker Orange (Replacing Teal) */
-    --neon-blue: #2563eb; /* Standard Blue for links */
-    --neon-pink: #dc2626; /* Standard Red for errors */
+    /* --- Brand — Same Indigo (Unified) --- */
+    --neon-violet: #4f46e5;
+    --neon-violet-hover: #4338ca;
+    --neon-violet-subtle: rgba(79, 70, 229, 0.08);
 
-    /* Text: High Contrast Dark */
-    --text-primary: #111827; /* Nearly Black */
-    --text-secondary: #4b5563; /* Dark Grey */
+    /* --- Interactive Accent --- */
+    --neon-teal: #6366f1;                      /* Slightly lighter indigo for light bg */
 
-    /* Effects: Flat Design (No Glows, just Shadows) */
+    /* --- Utility Colors --- */
+    --neon-blue: #3b82f6;
+    --neon-pink: #ef4444;
+
+    /* --- Semantic Colors --- */
+    --color-success: #059669;
+    --color-success-subtle: rgba(5, 150, 105, 0.08);
+    --color-warning: #d97706;
+    --color-warning-subtle: rgba(217, 119, 6, 0.08);
+    --color-error: #ef4444;
+    --color-error-subtle: rgba(239, 68, 68, 0.08);
+    --color-online: #16a34a;
+
+    /* --- Text --- */
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --text-muted: #94a3b8;
+
+    /* --- Effects --- */
     --glow-primary: none;
     --glow-teal: none;
-    --glass-blur: none; /* Remove glass effect for flat design */
-    --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
-        0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --glass-blur: none;
+
+    /* --- Shadow Elevation (lighter for light surfaces) --- */
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.04);
+    --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.04);
+    --shadow-lg: 0 12px 24px rgba(0, 0, 0, 0.10), 0 4px 8px rgba(0, 0, 0, 0.04);
+    --shadow-xl: 0 24px 48px rgba(0, 0, 0, 0.12), 0 8px 16px rgba(0, 0, 0, 0.04);
+    --shadow-card: var(--shadow-md);
 }
 
-* {
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+*,
+*::before,
+*::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    transition: background-color 0.3s ease, border-color 0.3s ease,
-        color 0.3s ease; /* Smooth Theme Transition */
+}
+
+/* Theme transition scoped to the properties that actually change.
+   Applies to all elements but only activates when values change
+   (e.g. during theme switch) — not on every interaction. */
+* {
+    transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease;
 }
 
 body {
     background-color: var(--holo-bg);
     color: var(--text-primary);
-    font-family: "Poppins", sans-serif;
+
+    /* Plus Jakarta Sans for headings/UI — Poppins as warm body fallback */
+    font-family: "Plus Jakarta Sans", "Poppins", sans-serif;
+
+    font-size: 16px;
+    line-height: 1.6;
+
+    /* Subpixel antialiasing — text reads sharper, especially Plus Jakarta Sans */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
     overflow-x: hidden;
 }
 
-/* Custom Scrollbar Adaptation */
+/* ============================================================
+   SCROLLBAR
+   Minimal, unobtrusive. Visible when needed, not decorative.
+   ============================================================ */
 ::-webkit-scrollbar {
-    width: 8px;
+    width: 6px;
+    height: 6px;
 }
+
 ::-webkit-scrollbar-track {
-    background: var(--holo-bg);
+    background: transparent;
 }
+
 ::-webkit-scrollbar-thumb {
-    background: var(--holo-panel); /* Will look grey in light mode */
-    border-radius: 4px;
-    border: 1px solid var(--holo-border);
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-full);
+    transition: background 0.2s ease;
 }
+
 ::-webkit-scrollbar-thumb:hover {
-    background: var(--neon-violet); /* Will be Orange in light mode */
+    background: rgba(79, 70, 229, 0.5);
+}
+
+[data-theme="light"] ::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.12);
+}
+
+[data-theme="light"] ::-webkit-scrollbar-thumb:hover {
+    background: rgba(79, 70, 229, 0.4);
+}
+
+/* ============================================================
+   FOCUS STATES
+   Accessible, consistent, brand-colored focus rings.
+   Never remove focus outlines — use :focus-visible instead.
+   ============================================================ */
+:focus-visible {
+    outline: 2px solid var(--neon-violet);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
 }

@@ -207,7 +207,7 @@ export default function DashboardLayout({ children }) {
                                         onClick={() => router.push("/profile")}
                                         className={styles.holoBtnFull}
                                     >
-                                        Access Profile
+                                        View Profile
                                     </button>
                                 </div>
                             </div>
@@ -216,7 +216,7 @@ export default function DashboardLayout({ children }) {
                             <div className={styles.glassPanel}>
                                 <div className="p-3 border-bottom border-white border-opacity-10 d-flex justify-content-between align-items-center">
                                     <h5 className={styles.panelTitle}>
-                                        Signal Discovery
+                                        People You May Know
                                     </h5>
                                     <span className={styles.livePulse}></span>
                                 </div>
@@ -309,12 +309,12 @@ export default function DashboardLayout({ children }) {
                                             ))
                                         ) : (
                                             <p className="text-center p-3 text-muted small">
-                                                No new signals.
+                                                No suggestions yet.
                                             </p>
                                         )
                                     ) : (
                                         <p className="text-center p-3 text-muted small">
-                                            Scanning...
+                                            Loading...
                                         </p>
                                     )}
                                 </div>
@@ -323,7 +323,7 @@ export default function DashboardLayout({ children }) {
                                         className={styles.textLinkBtn}
                                         onClick={() => router.push("/discover")}
                                     >
-                                        Expand Search
+                                        Browse All
                                     </button>
                                 </div>
                             </div>

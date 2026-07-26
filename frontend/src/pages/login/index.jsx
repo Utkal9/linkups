@@ -170,7 +170,8 @@ export default function LoginComponent() {
     return (
         <div className={styles.authPageWrapper}>
             <Head>
-                <title>Login | LinkUps</title>
+                <title>Sign In | LinkUps</title>
+                <meta name="description" content="Sign in to LinkUps — the professional networking platform for students and early-career professionals." />
             </Head>
 
             <div className={styles.ambientOrbTop}></div>
@@ -183,7 +184,7 @@ export default function LoginComponent() {
                         className={`col-lg-6 d-none d-lg-flex flex-column justify-content-center align-items-center ${styles.visualPanel}`}
                     >
                         <div className={styles.hologramEffect}>
-                            <div className={styles.scanline}></div>
+                            {/* Scanline removed — same reason as landing page: CRT effect is cyberpunk, not career platform */}
                             <img
                                 src="/images/homemain_connection.jpg"
                                 alt="LinkUps Network"
@@ -195,8 +196,8 @@ export default function LoginComponent() {
                                 Welcome to LinkUps
                             </h2>
                             <p className={styles.visualText}>
-                                Connect, collaborate, and grow your professional
-                                network in a secure environment.
+                                Build your resume, connect with peers,
+                                and practice for your next interview — all in one place.
                             </p>
                         </div>
                     </div>
@@ -216,11 +217,11 @@ export default function LoginComponent() {
                                 </h1>
                                 <p className={styles.formSubtitle}>
                                     {viewState === "login" &&
-                                        "Please login to continue"}
+                                        "Sign in to your account"}
                                     {viewState === "register" &&
-                                        "Join our professional community"}
+                                        "Start building your career network"}
                                     {viewState === "forgot" &&
-                                        "Enter email to reset password"}
+                                        "We'll send a reset link to your email"}
                                 </p>
                             </div>
 

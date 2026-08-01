@@ -40,10 +40,10 @@
     box-shadow: var(--shadow-card);
 }
 .title {
-    font-family: "Orbitron", sans-serif;
-    color: var(--neon-teal);
+    font-weight: 700; /* Orbitron removed */
+    color: var(--text-primary); /* Was neon-teal */
     margin-bottom: 20px;
-    font-size: 1.8rem;
+    font-size: 1.6rem;
 }
 .previewBox {
     position: relative;
@@ -105,7 +105,7 @@
     border-radius: 8px;
     font-weight: bold;
     cursor: pointer;
-    font-family: "Orbitron", sans-serif;
+    /* Orbitron removed from button label */
     font-size: 1rem;
 }
 
@@ -256,8 +256,8 @@
 }
 .chatHeader h3 {
     margin: 0;
-    color: var(--neon-teal);
-    font-family: "Orbitron", sans-serif;
+    color: var(--text-primary); /* Was neon-teal + Orbitron — chat panel header is UI, not brand */
+    font-weight: 700;
 }
 .closeChatBtn {
     background: none;

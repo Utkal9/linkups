@@ -28,16 +28,14 @@
 
 /* Brand Column */
 .holoLogo {
-    font-family: "Orbitron", sans-serif;
-    font-weight: 800;
-    font-size: 1.8rem;
+    font-weight: 800; /* Orbitron removed — Logo wordmark uses Plus Jakarta Sans 800 */
+    font-size: 1.6rem;
     color: var(--text-primary);
     margin-bottom: 1rem;
     cursor: pointer;
 }
 .holoLogo span {
-    color: var(--neon-teal);
-    text-shadow: 0 0 10px rgba(15, 255, 198, 0.2);
+    color: var(--neon-violet); /* Was neon-teal — brand unified */
 }
 
 .tagline {
@@ -68,7 +66,7 @@
 .socialIcon:hover {
     background: var(--neon-violet);
     color: #fff;
-    box-shadow: var(--glow-primary);
+    /* Glow removed from social icon hover */
 }
 
 /* Links */
@@ -78,12 +76,12 @@
     gap: 0.8rem;
 }
 .linkCol h4 {
-    font-family: "Orbitron";
+    font-weight: 700; /* Orbitron removed */
     color: var(--text-primary);
-    font-size: 1rem;
+    font-size: 0.85rem;
     margin-bottom: 0.5rem;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 0.5px;
 }
 .linkCol a {
     font-size: 0.9rem;
@@ -93,14 +91,14 @@
     transition: color 0.2s;
 }
 .linkCol a:hover {
-    color: var(--neon-teal);
+    color: var(--neon-violet); /* Was neon-teal — brand unified */
 }
 
 /* Newsletter */
 .newsletterCol h4 {
-    font-family: "Orbitron";
+    font-weight: 700; /* Orbitron removed */
     color: var(--text-primary);
-    font-size: 1rem;
+    font-size: 0.85rem;
     margin-bottom: 0.5rem;
 }
 .newsletterCol p {
@@ -144,7 +142,7 @@
     text-align: center;
     font-size: 0.8rem;
     color: var(--text-secondary);
-    font-family: monospace;
+    /* monospace removed — copyright text is not code */
 }
 
 /* Mobile */

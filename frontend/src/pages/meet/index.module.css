@@ -83,15 +83,15 @@
 }
 
 .title {
-    font-family: "Orbitron", sans-serif;
-    font-size: 2.5rem;
+    font-weight: 800; /* Orbitron removed */
+    font-size: 2.2rem;
     color: var(--text-primary);
     margin: 0 0 12px 0;
 }
 
 .highlight {
     color: transparent;
-    background: linear-gradient(90deg, var(--neon-violet), var(--neon-teal));
+    background: linear-gradient(90deg, var(--neon-violet), #818cf8); /* Unified brand gradient */
     -webkit-background-clip: text;
     background-clip: text;
 }
@@ -146,8 +146,8 @@
 }
 
 .cardTitle {
-    font-family: "Orbitron", sans-serif;
-    font-size: 1.4rem;
+    font-weight: 700; /* Orbitron removed */
+    font-size: 1.3rem;
     color: var(--text-primary);
     margin: 0 0 8px 0;
 }
@@ -168,19 +168,19 @@
     padding: 14px;
     border-radius: 12px;
     font-weight: 600;
-    font-family: "Orbitron", sans-serif;
+    /* Orbitron removed from button label */
     font-size: 0.95rem;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
-    transition: all 0.2s;
-    box-shadow: var(--glow-primary);
+    transition: background var(--transition-fast), transform var(--transition-fast);
+    /* Glow removed from primary button */
 }
 
 .primaryBtn:hover {
-    background: #7c3aed;
+    background: var(--neon-violet-hover);
     transform: scale(1.02);
 }
 
@@ -204,14 +204,14 @@
 }
 
 .inputField:focus {
-    border-color: var(--neon-teal);
-    box-shadow: 0 0 10px rgba(15, 255, 198, 0.2);
+    border-color: var(--neon-violet); /* Was neon-teal — brand unified */
+    /* Glow removed */
 }
 
 .joinBtn {
     background: transparent;
-    border: 1px solid var(--neon-teal);
-    color: var(--neon-teal);
+    border: 1px solid var(--neon-violet); /* Was neon-teal — brand unified */
+    color: var(--neon-violet);
     width: 50px;
     border-radius: 12px;
     display: flex;

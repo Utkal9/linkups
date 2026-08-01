@@ -96,8 +96,7 @@
     line-height: 1.6;
 }
 .jdTextarea:focus {
-    border-color: var(--neon-teal);
-    box-shadow: 0 0 15px rgba(15, 255, 198, 0.08);
+    border-color: var(--neon-violet); /* Was neon-teal — brand unified */
 }
 .jdTextarea::placeholder { color: var(--text-secondary); opacity: 0.5; }
 
@@ -141,13 +140,14 @@
     align-items: center;
     justify-content: center;
     gap: 10px;
-    transition: transform 0.15s, box-shadow 0.2s;
-    background: var(--neon-teal);
-    color: #000;
+    transition: background var(--transition-fast), transform var(--transition-fast);
+    background: var(--neon-violet); /* Was neon-teal + black — brand unified */
+    color: white;
 }
 .analyzeBtn:hover:not(:disabled) {
+    background: var(--neon-violet-hover);
     transform: translateY(-1px);
-    box-shadow: 0 0 20px rgba(15, 255, 198, 0.35);
+    /* Glow removed */
 }
 .analyzeBtn:disabled {
     opacity: 0.5;
@@ -161,7 +161,7 @@
     font-size: 0.9rem;
 }
 .noResumesLink {
-    color: var(--neon-teal);
+    color: var(--neon-violet); /* Was neon-teal — brand unified */
     text-decoration: underline;
     cursor: pointer;
 }
@@ -200,7 +200,7 @@
 .tabActive {
     background: var(--neon-violet);
     color: #fff;
-    box-shadow: 0 0 15px rgba(139, 92, 246, 0.3);
+    /* Glow removed from active tab */
 }
 
 /* ===== RESULTS CONTAINER ===== */
@@ -492,12 +492,12 @@
     width: 72px;
     height: 72px;
     border-radius: 50%;
-    background: rgba(15, 255, 198, 0.1);
+    background: rgba(16, 185, 129, 0.1);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--neon-teal);
-    border: 2px solid rgba(15, 255, 198, 0.3);
+    color: var(--color-online); /* Was neon-teal — success icon = semantic green */
+    border: 2px solid rgba(16, 185, 129, 0.3);
 }
 .tailorSuccessTitle {
     font-size: 1.3rem;
@@ -524,11 +524,14 @@
     font-size: 0.9rem;
     font-family: "Poppins", sans-serif;
     cursor: pointer;
-    background: var(--neon-teal);
-    color: #000;
-    transition: transform 0.15s;
+    background: var(--neon-violet); /* Was neon-teal + black — brand unified */
+    color: white;
+    transition: background var(--transition-fast), transform var(--transition-fast);
 }
-.tailorViewBtn:hover { transform: translateY(-1px); }
+.tailorViewBtn:hover {
+    background: var(--neon-violet-hover);
+    transform: translateY(-1px);
+}
 
 .tailorSecondaryBtn {
     padding: 12px 28px;
@@ -678,8 +681,8 @@
 }
 
 .checkBox {
-    background: rgba(15, 255, 198, 0.06);
-    border-left: 3px solid var(--neon-teal);
+    background: rgba(16, 185, 129, 0.06);
+    border-left: 3px solid var(--color-online); /* Was neon-teal — checklist items = semantic green */
     border-radius: 0 8px 8px 0;
     padding: 12px 16px;
 }
@@ -688,7 +691,7 @@
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    color: var(--neon-teal);
+    color: var(--color-online); /* Was neon-teal — semantic green for 'what to check' */
     margin-bottom: 4px;
 }
 .checkText {

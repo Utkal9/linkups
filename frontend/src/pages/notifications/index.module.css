@@ -21,13 +21,12 @@
 }
 
 .title {
-    font-family: "Orbitron", sans-serif;
-    font-size: 1.8rem;
+    font-weight: 700; /* Orbitron removed */
+    font-size: 1.5rem;
     color: var(--text-primary);
     margin-bottom: 24px;
     padding-bottom: 12px;
     border-bottom: 1px solid var(--holo-border);
-    letter-spacing: 1px;
 }
 
 .list {
@@ -61,8 +60,8 @@
 
 /* Unread State - Highlighted */
 .unread {
-    background: rgba(139, 92, 246, 0.08); /* Subtle Violet Tint */
-    border-left: 4px solid var(--neon-teal);
+    background: rgba(79, 70, 229, 0.06);
+    border-left: 4px solid var(--neon-violet); /* Was neon-teal — unread = important, not online */
 }
 
 /* Avatar */
@@ -76,7 +75,7 @@
 }
 
 .unread .avatar {
-    border-color: var(--neon-teal);
+    border-color: var(--neon-violet); /* Was neon-teal — brand unified */
 }
 
 /* Content Text */
@@ -103,16 +102,15 @@
     font-size: 0.75rem;
     color: var(--text-secondary);
     opacity: 0.7;
-    font-family: monospace;
+    /* monospace removed — timestamps are metadata, not code */
 }
 
 /* Unread Indicator Dot */
 .dot {
-    width: 10px;
-    height: 10px;
-    background-color: var(--neon-pink);
+    width: 8px;
+    height: 8px;
+    background-color: var(--neon-violet); /* Was neon-pink + glow — notification dot = brand */
     border-radius: 50%;
-    box-shadow: 0 0 10px var(--neon-pink);
     flex-shrink: 0;
 }
 

@@ -24,7 +24,7 @@
     text-align: center;
     padding: 50px;
     color: var(--text-secondary);
-    font-family: "Orbitron", sans-serif;
+    /* Orbitron removed */
 }
 
 /* --- Header Card --- */
@@ -84,7 +84,7 @@
     border-radius: 50%;
     object-fit: cover;
     border: 4px solid var(--holo-bg);
-    box-shadow: 0 0 20px rgba(139, 92, 246, 0.5);
+    /* Glow removed — avatars should look human, not radioactive */
     background: #000;
 }
 .onlineDot {
@@ -93,7 +93,7 @@
     right: 8px;
     width: 18px;
     height: 18px;
-    background: var(--neon-teal);
+    background: var(--color-online); /* Was neon-teal — semantic presence */
     border: 3px solid var(--holo-bg);
     border-radius: 50%;
 }
@@ -117,12 +117,12 @@
 }
 
 .userName {
-    font-family: "Orbitron", sans-serif;
     font-size: 1.8rem;
     font-weight: 700;
     margin: 0;
     color: var(--text-primary);
     line-height: 1.2;
+    /* Orbitron removed — names are human identifiers */
 }
 
 .userHeadline {
@@ -161,7 +161,7 @@
     background: var(--neon-violet);
     border-color: var(--neon-violet);
     transform: translateY(-2px);
-    box-shadow: var(--glow-primary);
+    /* Glow removed from icon button hover */
     color: #fff;
 }
 
@@ -181,13 +181,13 @@
 
 /* Button Status Colors */
 .connect {
-    background: var(--neon-teal);
-    color: #000;
+    background: var(--neon-violet); /* Was neon-teal + black — brand unified */
+    color: white;
     border: none;
 }
 .connect:hover {
-    background: #0fd1a3;
-    box-shadow: var(--glow-teal);
+    background: var(--neon-violet-hover);
+    /* Glow removed */
 }
 
 .pending {
@@ -198,9 +198,9 @@
 }
 
 .connected {
-    background: rgba(15, 255, 198, 0.1);
-    color: var(--neon-teal);
-    border: 1px solid var(--neon-teal);
+    background: rgba(16, 185, 129, 0.08);
+    color: var(--color-online); /* Was neon-teal — semantic: connected = present/alive */
+    border: 1px solid rgba(16, 185, 129, 0.4);
     cursor: default;
 }
 
@@ -211,7 +211,7 @@
 }
 .accept:hover {
     background: #2563eb;
-    box-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
+    /* Glow removed */
 }
 
 /* Meta Data */
@@ -298,9 +298,9 @@
     position: relative;
 }
 .cardTitle {
-    font-family: "Orbitron", sans-serif;
+    font-weight: 700; /* Orbitron removed */
     color: var(--text-primary);
-    font-size: 1.1rem;
+    font-size: 1rem;
     margin-bottom: 16px;
     border-bottom: 1px solid var(--holo-border);
     padding-bottom: 8px;
@@ -330,7 +330,7 @@
 }
 .stackItem label {
     display: block;
-    color: var(--neon-teal);
+    color: var(--text-secondary); /* Was neon-teal — form labels should be calm */
     font-size: 0.8rem;
     margin-bottom: 4px;
     font-weight: 600;
@@ -381,8 +381,7 @@
     font-size: 0.9rem;
 }
 .timelineContent small {
-    color: var(--neon-blue);
-    font-family: monospace;
+    color: var(--text-secondary); /* Was neon-blue + monospace — dates are metadata */
     display: block;
     margin: 4px 0;
     font-size: 0.8rem;
@@ -427,7 +426,7 @@
     margin-bottom: 8px;
 }
 .projectLink {
-    color: var(--neon-teal);
+    color: var(--neon-violet); /* Was neon-teal — brand unified */
     font-size: 0.85rem;
     text-decoration: none;
     display: flex;
@@ -520,7 +519,7 @@
     margin: 0;
 }
 .readMore {
-    color: var(--neon-teal);
+    color: var(--neon-violet); /* Was neon-teal — brand unified */
     font-size: 0.8rem;
     margin-left: 4px;
     cursor: pointer;
@@ -592,8 +591,9 @@
 }
 .modalHeader h3 {
     margin: 0;
-    font-family: "Orbitron", sans-serif;
+    font-weight: 700; /* Orbitron removed */
     color: var(--text-primary);
+    font-size: 1rem;
 }
 .closeIcon {
     background: none;
@@ -627,7 +627,7 @@
     height: 48px;
     border-radius: 50%;
     object-fit: cover;
-    border: 2px solid var(--neon-teal);
+    border: 2px solid var(--holo-border); /* Was neon-teal — list avatars need no color ring */
 }
 .connectionName {
     font-weight: 600;
@@ -679,10 +679,9 @@
 .imageModalContent img {
     width: 100%;
     height: 100%;
-    object-fit: contain; /* Ensures HD image isn't cropped */
+    object-fit: contain;
     border-radius: 12px;
-    border: 2px solid var(--neon-teal);
-    box-shadow: 0 0 50px rgba(15, 255, 198, 0.2);
+    border: 2px solid var(--holo-border); /* Was neon-teal border + glow */
     background-color: #000;
 }
 
@@ -705,9 +704,10 @@
 }
 
 .closeImageBtn:hover {
-    background: var(--neon-pink);
-    border-color: var(--neon-pink);
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.4);
     transform: scale(1.1);
+    /* Was neon-pink — close buttons should not feel dangerous */
 }
 
 .closeImageBtn svg {

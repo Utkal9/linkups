@@ -33,10 +33,10 @@
     bottom: 30px;
     right: 30px;
     background: var(--holo-panel);
-    border: 1px solid var(--neon-teal);
+    border: 1px solid var(--holo-border); /* Was neon-teal — toast border should be neutral */
     padding: 12px 24px;
     border-radius: 12px;
-    color: var(--neon-teal);
+    color: var(--text-primary);
     display: flex;
     align-items: center;
     gap: 12px;
@@ -88,11 +88,10 @@
 }
 
 .headerTitle {
-    font-family: "Orbitron", sans-serif;
+    font-weight: 700; /* Orbitron removed */
     color: var(--text-primary);
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     margin: 0;
-    letter-spacing: 1px;
 }
 
 .iconBtn {
@@ -181,7 +180,7 @@
     right: 2px;
     width: 10px;
     height: 10px;
-    background: var(--neon-teal);
+    background: var(--color-online); /* Was neon-teal — semantic presence */
     border-radius: 50%;
     border: 2px solid var(--holo-panel);
 }
@@ -227,7 +226,7 @@
 }
 .statusOnline {
     font-size: 0.7rem;
-    color: var(--neon-teal);
+    color: var(--color-online); /* Was neon-teal — semantic presence */
     font-weight: 600;
     white-space: nowrap;
 }
@@ -305,7 +304,7 @@
     right: 0;
     width: 8px;
     height: 8px;
-    background: var(--neon-teal);
+    background: var(--color-online); /* Was neon-teal — semantic presence */
     border-radius: 50%;
 }
 .headerText h3 {
@@ -325,7 +324,7 @@
 .headerActions .actionBtn {
     background: var(--holo-glass);
     border: 1px solid var(--holo-border);
-    color: var(--neon-teal);
+    color: var(--text-secondary); /* Was neon-teal — icon action buttons are secondary */
     width: 40px;
     height: 40px;
     border-radius: 12px;
@@ -333,11 +332,11 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    transition: all 0.2s;
 }
 .headerActions .actionBtn:hover {
-    background: var(--neon-teal);
-    color: #000;
-    box-shadow: var(--glow-teal);
+    background: var(--neon-violet); /* Was neon-teal/#000/glow — brand unified */
+    color: white;
 }
 .headerMenuDropdown {
     position: absolute;
@@ -452,7 +451,7 @@
 }
 .tickBlue {
     color: var(--neon-blue);
-    filter: drop-shadow(0 0 3px rgba(59, 130, 246, 0.5));
+    /* Glow filter removed from read receipts */
 }
 
 /* Menu */
@@ -553,7 +552,7 @@
     align-items: center;
 }
 .saveEditBtn {
-    color: var(--neon-teal);
+    color: var(--neon-violet); /* Was neon-teal — brand unified */
 }
 .cancelEditBtn {
     color: var(--neon-pink);
@@ -587,7 +586,7 @@
     outline: none;
 }
 .sendBtn {
-    background: var(--neon-teal);
+    background: var(--neon-violet); /* Was neon-teal + black — brand unified */
     border: none;
     width: 40px;
     height: 40px;
@@ -596,17 +595,18 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    color: #000;
-    transition: transform 0.2s;
+    color: white;
+    transition: background var(--transition-fast), transform var(--transition-fast);
 }
 .sendBtn:disabled {
-    background: #444;
-    color: #888;
+    background: var(--holo-border);
+    color: var(--text-secondary);
     cursor: default;
 }
 .sendBtn:hover:not(:disabled) {
-    transform: scale(1.1);
-    box-shadow: var(--glow-teal);
+    background: var(--neon-violet-hover);
+    transform: scale(1.05);
+    /* Glow removed */
 }
 
 /* Info Modal */
@@ -629,15 +629,16 @@
     padding: 20px;
     border-radius: 16px;
     min-width: 300px;
-    box-shadow: var(--glow-primary);
+    box-shadow: var(--shadow-card); /* Was glow-primary */
     animation: fadeIn 0.2s ease-out;
 }
 .infoCard h3 {
     color: var(--text-primary);
-    font-family: "Orbitron", sans-serif;
+    font-weight: 700; /* Orbitron removed */
     margin-top: 0;
     border-bottom: 1px solid var(--holo-border);
     padding-bottom: 10px;
+    font-size: 1rem;
 }
 .infoRow {
     display: flex;
@@ -650,7 +651,7 @@
 }
 .infoRow span {
     color: var(--text-primary);
-    font-family: monospace;
+    /* monospace removed — message metadata is not code */
 }
 .infoCard button {
     width: 100%;
@@ -680,8 +681,7 @@
 }
 .emptyState h3 {
     color: var(--text-primary);
-    font-family: "Orbitron", sans-serif;
-    font-weight: 400;
+    font-weight: 600; /* Orbitron removed */
     margin-bottom: 8px;
 }
 

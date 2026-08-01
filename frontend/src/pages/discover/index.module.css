@@ -23,11 +23,10 @@
 }
 
 .pageTitle {
-    font-family: "Orbitron", sans-serif;
+    font-weight: 700; /* Orbitron removed */
     color: var(--text-primary);
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     margin: 0;
-    letter-spacing: 1px;
 }
 .pageSubtitle {
     color: var(--text-secondary);
@@ -63,8 +62,7 @@
 }
 .searchWrapper input:focus {
     background: var(--holo-panel);
-    border-color: var(--neon-teal);
-    box-shadow: 0 0 15px rgba(15, 255, 198, 0.2);
+    border-color: var(--neon-violet); /* Was neon-teal — brand unified */
 }
 .searchWrapper input:focus + svg {
     color: var(--neon-teal);
@@ -102,18 +100,17 @@
     align-items: center;
     justify-content: center;
     min-height: 50vh;
-    color: var(--neon-teal);
-    font-family: "Orbitron", sans-serif;
+    color: var(--text-secondary); /* Was neon-teal, Orbitron removed */
     gap: 16px;
 }
 .loadingSpinner {
     width: 40px;
     height: 40px;
-    border: 3px solid rgba(15, 255, 198, 0.1);
-    border-top-color: var(--neon-teal);
+    border: 3px solid var(--holo-border);
+    border-top-color: var(--neon-violet); /* Was neon-teal — brand unified */
     border-radius: 50%;
     animation: spin 1s linear infinite;
-    box-shadow: 0 0 15px rgba(15, 255, 198, 0.2);
+    /* Glow removed from spinner */
 }
 @keyframes spin {
     to {
@@ -193,7 +190,7 @@
     right: 2px;
     width: 14px;
     height: 14px;
-    background-color: var(--neon-teal);
+    background-color: var(--color-online); /* Was neon-teal — semantic online presence */
     border: 3px solid var(--holo-bg);
     border-radius: 50%;
 }
@@ -252,7 +249,7 @@
 .connect:hover {
     background: var(--neon-violet);
     color: white;
-    box-shadow: var(--glow-primary);
+    /* Glow removed — hover states should not emit light */
 }
 
 .pending {
@@ -263,20 +260,20 @@
 }
 
 .connected {
-    background: rgba(15, 255, 198, 0.1);
-    border-color: var(--neon-teal);
-    color: var(--neon-teal);
+    background: rgba(16, 185, 129, 0.08);
+    border-color: rgba(16, 185, 129, 0.4);
+    color: var(--color-online); /* Was neon-teal — semantic: connected = present/alive */
     cursor: default;
 }
 
 .accept {
-    background: var(--neon-teal);
-    color: #000;
+    background: var(--neon-violet); /* Was neon-teal + black — brand unified */
+    color: white;
     border: none;
 }
 .accept:hover {
-    background: #0fd1a3;
-    box-shadow: var(--glow-teal);
+    background: var(--neon-violet-hover);
+    /* Glow removed */
 }
 
 .emptyState {

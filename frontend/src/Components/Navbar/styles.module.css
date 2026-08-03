@@ -121,6 +121,7 @@
 }
 .navLink.active .navIcon {
     /* inherits color from .navLink.active — no extra styles needed */
+}
 .navLink.active .navLabel {
     font-weight: 600; /* Semibold label reinforces active state */
 }

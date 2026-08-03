@@ -28,8 +28,8 @@
     right: -10%;
     width: 500px;
     height: 500px;
-    background: radial-gradient(circle, var(--neon-teal) 0%, transparent 70%);
-    opacity: 0.1;
+    background: radial-gradient(circle, var(--neon-violet) 0%, transparent 70%); /* Was neon-teal — brand unified */
+    opacity: 0.08;
     filter: blur(100px);
     z-index: 0;
 }
@@ -66,7 +66,7 @@
     aspect-ratio: 1/1;
     border-radius: 50%;
     overflow: hidden;
-    box-shadow: var(--glow-primary);
+    /* glow-primary removed — a glowing image frame communicates game UI */
     border: 2px solid var(--holo-border);
 }
 
@@ -86,7 +86,7 @@
     background: linear-gradient(
         to bottom,
         transparent 50%,
-        var(--neon-teal) 51%,
+        var(--neon-violet) 51%,
         transparent 52%
     );
     background-size: 100% 10px;
@@ -106,12 +106,12 @@
 }
 
 .visualTitle {
-    font-family: "Orbitron", sans-serif;
+    /* Orbitron removed. Uppercase and letter-spacing removed.
+       A welcome message should feel warm, not like a system prompt. */
     color: var(--text-primary);
     font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
     margin-bottom: 0.5rem;
+    font-size: 1.25rem;
 }
 
 .visualText {
@@ -134,21 +134,22 @@
 
 /* --- Login Logo Style --- */
 .loginLogo {
-    font-family: "Orbitron", sans-serif;
+    /* Orbitron removed — Plus Jakarta Sans 900 is bold enough for a wordmark.
+       Text-shadow/glow removed — product identity should not need a halo. */
     font-weight: 900;
-    font-size: 2.5rem;
+    font-size: 2.2rem;
     color: var(--text-primary);
-    letter-spacing: 2px;
     margin-bottom: 1rem;
-    text-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+    letter-spacing: -0.5px;
 }
 .loginLogo span {
-    color: var(--neon-teal);
+    color: var(--neon-violet); /* Was neon-teal — brand unified */
 }
 
 .formTitle {
-    font-family: "Orbitron", sans-serif;
-    font-size: 1.8rem;
+    /* Orbitron removed — form titles are orientation labels, not brand moments */
+    font-size: 1.6rem;
+    font-weight: 700;
     color: var(--text-primary);
     margin-bottom: 0.5rem;
 }
@@ -196,22 +197,22 @@
     width: 100%;
     padding: 14px;
     background: var(--neon-violet);
-    color: white; /* Primary button text usually stays white */
+    color: white;
     border: none;
     border-radius: 8px;
-    font-family: "Orbitron", sans-serif;
+    /* Orbitron removed. Uppercase removed. Letter-spacing removed. Glow removed.
+       Auth buttons are the most important action on the page.
+       They should be clear and direct, not theatrical. */
     font-weight: 600;
-    letter-spacing: 1px;
+    font-size: 0.95rem;
     cursor: pointer;
-    transition: all 0.3s;
+    transition: background var(--transition-fast), transform var(--transition-fast);
     position: relative;
     overflow: hidden;
-    text-transform: uppercase;
-    box-shadow: var(--glow-primary);
 }
 
 .btnNeon:hover:not(:disabled) {
-    filter: brightness(1.1);
+    background: var(--neon-violet-hover);
     transform: translateY(-1px);
 }
 
@@ -239,7 +240,7 @@
 
 .socialBtn:hover {
     background: var(--holo-panel);
-    border-color: var(--neon-teal);
+    border-color: var(--neon-violet); /* Was neon-teal — brand unified */
 }
 
 /* --- Divider --- */
@@ -264,7 +265,7 @@
 
 /* --- Links & Footer --- */
 .linkAction {
-    color: var(--neon-teal);
+    color: var(--neon-violet); /* Was neon-teal — brand unified */
     font-size: 0.85rem;
     cursor: pointer;
     transition: color 0.2s;
@@ -297,9 +298,9 @@
 
 /* --- Messages --- */
 .msgError {
-    background: rgba(239, 68, 68, 0.1);
-    border: 1px solid var(--neon-pink);
-    color: var(--neon-pink);
+    background: rgba(239, 68, 68, 0.08);
+    border: 1px solid rgba(239, 68, 68, 0.4);
+    color: #ef4444; /* Semantic error red — not neon-pink */
     padding: 10px;
     border-radius: 6px;
     font-size: 0.85rem;
@@ -307,9 +308,9 @@
     text-align: center;
 }
 .msgSuccess {
-    background: rgba(16, 185, 129, 0.1);
-    border: 1px solid var(--neon-teal);
-    color: var(--neon-teal);
+    background: rgba(16, 185, 129, 0.08);
+    border: 1px solid rgba(16, 185, 129, 0.4);
+    color: var(--color-online); /* Semantic success green — was neon-teal */
     padding: 10px;
     border-radius: 6px;
     font-size: 0.85rem;

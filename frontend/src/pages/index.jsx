@@ -7,19 +7,9 @@ import { useEffect, useState, useRef } from "react";
 import { useSelector } from "react-redux";
 import { motion, useInView } from "framer-motion";
 
-// --- Tech Stack Icons ---
-const techStack = [
-    "REACT",
-    "NEXT.JS",
-    "REDUX",
-    "NODE.JS",
-    "EXPRESS",
-    "MONGODB",
-    "SOCKET.IO",
-    "WEBRTC",
-    "CLOUDINARY",
-    "JWT",
-];
+// --- REMOVED: techStack marquee array ---
+// The tech stack marquee communicated "portfolio project" rather than "real product."
+// Replaced with a product-first feature strip in the layout.
 
 // --- Icons ---
 const EmailIcon = () => (
@@ -144,7 +134,7 @@ const PostDemo = () => {
             </div>
             <div className={styles.mockContent}>
                 <div className={styles.typingText}>
-                    "Just deployed the new neural protocol!" 🚀
+                    "Just landed a backend internship! Excited to start working 🎉"
                 </div>
             </div>
             <div className={styles.mockActions}>
@@ -182,18 +172,19 @@ const ConnectDemo = () => {
                 style={{
                     cursor: "pointer",
                     background:
-                        status === "connected" ? "var(--neon-teal)" : undefined,
-                    color: status === "connected" ? "#000" : undefined,
+                        status === "connected" ? "var(--neon-violet)" : undefined,
+                    color: status === "connected" ? "#fff" : undefined,
+                    borderColor: status === "connected" ? "var(--neon-violet)" : undefined,
                 }}
             >
                 {status === "idle" && (
                     <>
-                        <div className={styles.camIcon}></div> Accept Uplink
+                        <div className={styles.camIcon}></div> Accept Call
                     </>
                 )}
-                {status === "connecting" && "Establishing Secure Line..."}
+                {status === "connecting" && "Connecting..."}
                 {status === "connected" && (
-                    <span>● Secure Connection Active</span>
+                    <span>● Connected</span>
                 )}
             </div>
         </div>
@@ -216,12 +207,12 @@ export default function Home() {
     return (
         <div className={styles.landingWrapper}>
             <Head>
-                <title>LinkUps | The Professional Neural Network</title>
-                <meta
-                    name="description"
-                    content="Connect, Collaborate, Evolve. The next-gen professional network."
-                />
-            </Head>
+            <title>LinkUps | Professional Networking for Students</title>
+            <meta
+                name="description"
+                content="LinkUps is a professional networking platform for students and early-career professionals. Build your resume, connect with peers, and practice interviews."
+            />
+        </Head>
 
             {/* --- HERO SECTION --- */}
             <section className={styles.heroSection}>
@@ -232,17 +223,15 @@ export default function Home() {
                     className={styles.heroContent}
                 >
                     <div className={styles.heroBadge}>
-                        <span className={styles.pulseDot}></span> v2.0 System
-                        Online
+                        <span className={styles.pulseDot}></span> For students &amp; early-career professionals
                     </div>
                     <h1 className={styles.heroTitle}>
-                        Connect. Collaborate. <br />
-                        <span className={styles.gradientText}>Evolve.</span>
+                        Your professional network,<br />
+                        <span className={styles.gradientText}>built for where you are.</span>
                     </h1>
                     <p className={styles.heroSubtitle}>
-                        The next-generation professional network. Build your
-                        identity, connect with peers, and auto-generate your
-                        resume in seconds.
+                        Connect with students and professionals in your field,
+                        build your resume, and practice for interviews — all in one place.
                     </p>
                     <div className={styles.heroButtons}>
                         <button
@@ -250,14 +239,14 @@ export default function Home() {
                             className={styles.primaryBtn}
                         >
                             {isTokenThere
-                                ? "Enter Dashboard"
-                                : "Initialize Protocol"}
+                                ? "Go to Feed"
+                                : "Get Started"}
                         </button>
                         <button
                             onClick={() => router.push("/discover")}
                             className={styles.secondaryBtn}
                         >
-                            Explore Nodes
+                            Browse People →
                         </button>
                     </div>
                 </motion.div>
@@ -271,7 +260,7 @@ export default function Home() {
                 >
                     <div className={styles.hologramFrame}>
                         <div className={styles.imageWrapper}>
-                            <div className={styles.scanline}></div>
+                            {/* Scanline animation removed — communicates surveillance/cyberpunk, not career platform */}
                             {/* Main Image Preserved */}
                             <img
                                 src="/images/homemain_connection.jpg"
@@ -341,19 +330,16 @@ export default function Home() {
                 </motion.div>
             </section>
 
-            {/* --- TECH MARQUEE --- */}
-            <div className={styles.marqueeContainer}>
-                <div className={styles.marqueeContent}>
-                    {[
-                        ...techStack,
-                        ...techStack,
-                        ...techStack,
-                        ...techStack,
-                    ].map((tech, i) => (
-                        <span key={i} className={styles.techItem}>
-                            {tech}
-                        </span>
-                    ))}
+            {/* --- FEATURE STRIP --- */}
+            {/* Tech marquee removed: scrolling REACT/NODE.JS/MONGODB signals portfolio, not product.
+                Feature strip signals value to the user, not technology used by the developer. */}
+            <div className={styles.featureStrip}>
+                <div className={styles.featureStripItems}>
+                    <span className={styles.featureStripItem}>Resume Builder</span>
+                    <span className={styles.featureStripDot}>·</span>
+                    <span className={styles.featureStripItem}>ATS Analyzer</span>
+                    <span className={styles.featureStripDot}>·</span>
+                    <span className={styles.featureStripItem}>AI Mock Interviews</span>
                 </div>
             </div>
 
@@ -367,18 +353,18 @@ export default function Home() {
             >
                 <div className={styles.featureText}>
                     <h2 className={styles.featureTitle}>
-                        Smart Identity & Resume
+                        Build your resume in minutes
                     </h2>
                     <p className={styles.featureDesc}>
-                        Stop wasting time formatting Word documents. Fill out
-                        your LinkUps profile once, and our{" "}
-                        <strong>Smart Builder</strong> generates a professional,
-                        ATS-friendly DOCX resume instantly.
+                        Stop wrestling with Word documents. Fill out your profile
+                        once, and the{" "}
+                        <strong>Resume Builder</strong> generates a clean,
+                        ATS-friendly resume instantly.
                     </p>
                     <ul className={styles.featureList}>
-                        <li>✅ One-Click Download</li>
-                        <li>✅ ATS Optimized Layout</li>
-                        <li>✅ Real-time Preview Logic</li>
+                        <li>✓  One-click download (.DOCX)</li>
+                        <li>✓  Two professional templates</li>
+                        <li>✓  Live preview as you type</li>
                     </ul>
                 </div>
                 <div className={styles.featureDemo}>
@@ -395,11 +381,11 @@ export default function Home() {
                 className={`${styles.featureSection} ${styles.reverse}`}
             >
                 <div className={styles.featureText}>
-                    <h2 className={styles.featureTitle}>Live Data Stream</h2>
+                    <h2 className={styles.featureTitle}>Share updates with your network</h2>
                     <p className={styles.featureDesc}>
-                        Share updates, images, and videos with your network.
-                        Engage with unique reaction types and real-time
-                        comments. Try the interactive demo to the left!
+                        Post updates, share achievements, and engage with
+                        your community. React with emoji, comment in real time,
+                        and build your presence. Try it below.
                     </p>
                 </div>
                 <div className={styles.featureDemo}>
@@ -417,18 +403,13 @@ export default function Home() {
             >
                 <div className={styles.featureText}>
                     <h2 className={styles.featureTitle}>
-                        Encrypted Communication
+                        Message and meet your connections
                     </h2>
                     <p className={styles.featureDesc}>
-                        Connect with developers and creators. Start secure
-                        1-on-1 chats or launch an instant
-                        <strong> Video Uplink</strong> meeting.
+                        Send direct messages and jump into a video call with
+                        anyone in your network. Real-time messaging powered by
+                        WebSockets with peer-to-peer video via WebRTC.
                     </p>
-                    <div className={styles.tagContainer}>
-                        <span className={styles.techTag}>Socket.io</span>
-                        <span className={styles.techTag}>WebRTC</span>
-                        <span className={styles.techTag}>Secure</span>
-                    </div>
                 </div>
                 <div className={styles.featureDemo}>
                     <ConnectDemo />
@@ -438,33 +419,29 @@ export default function Home() {
             {/* --- LIVE STATS --- */}
             <section className={styles.statsSection}>
                 <div className={styles.statCard}>
-                    <h3>
-                        <AnimatedCounter end={10000} suffix="+" />
-                    </h3>
-                    <p>Active Nodes</p>
+                    <h3>3</h3>
+                    <p>AI-powered tools</p>
                 </div>
                 <div className={styles.statCard}>
-                    <h3>
-                        <AnimatedCounter end={500} suffix="TB" />
-                    </h3>
-                    <p>Data Transmitted</p>
+                    <h3>2</h3>
+                    <p>Resume templates</p>
                 </div>
                 <div className={styles.statCard}>
-                    <h3>99.9%</h3>
-                    <p>Uptime Reliability</p>
+                    <h3>Real-time</h3>
+                    <p>WebSocket chat</p>
                 </div>
                 <div className={styles.statCard}>
-                    <h3>24/7</h3>
-                    <p>Global Uplink</p>
+                    <h3>WebRTC</h3>
+                    <p>Peer-to-peer video</p>
                 </div>
             </section>
 
             {/* --- MEET THE DEVELOPER --- */}
             <section className={styles.developerSection}>
                 <div className={styles.devContentWrapper}>
-                    <h2 className={styles.sectionTitle}>Meet the Architect</h2>
+                    <h2 className={styles.sectionTitle}>About the Developer</h2>
                     <p className={styles.sectionSubtitle}>
-                        Engineered for scalability.
+                        The person who built LinkUps.
                     </p>
 
                     <motion.div
@@ -515,13 +492,13 @@ export default function Home() {
 
             {/* --- CTA SECTION --- */}
             <section className={styles.ctaSection}>
-                <h2>Ready to Join the Grid?</h2>
-                <p>Create your account today and start building your legacy.</p>
+                <h2>Start building your career network today.</h2>
+                <p>Join students and early-career professionals already using LinkUps.</p>
                 <button
                     onClick={() => router.push("/login")}
                     className={styles.glowBtn}
                 >
-                    Start Registration
+                    Create Free Account
                 </button>
             </section>
         </div>

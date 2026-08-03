@@ -24,7 +24,7 @@
     text-align: center;
     padding: 50px;
     color: var(--text-secondary);
-    font-family: "Orbitron", sans-serif;
+    /* Orbitron removed from loading state */
 }
 
 /* --- TOAST NOTIFICATION --- */
@@ -47,15 +47,13 @@
 }
 
 .notificationToast.success {
-    border-color: var(--neon-teal);
-    box-shadow: 0 0 20px rgba(15, 255, 198, 0.2);
-    color: var(--neon-teal);
+    border-color: rgba(16, 185, 129, 0.5);
+    color: var(--color-online); /* Was neon-teal — semantic green */
 }
 
 .notificationToast.error {
-    border-color: var(--neon-pink);
-    box-shadow: 0 0 20px rgba(236, 72, 153, 0.2);
-    color: var(--neon-pink);
+    border-color: rgba(239, 68, 68, 0.4);
+    color: #ef4444; /* Was neon-pink — semantic red */
 }
 
 .notificationToast span {
@@ -88,10 +86,10 @@
 }
 
 .confirmTitle {
-    font-family: "Orbitron", sans-serif;
+    font-weight: 700; /* Orbitron removed */
     color: var(--text-primary);
     margin: 0 0 12px 0;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
 }
 
 .confirmText {
@@ -123,18 +121,18 @@
 }
 
 .deleteConfirmBtn {
-    background: var(--neon-pink);
+    background: #ef4444; /* Was neon-pink — semantic danger red */
     border: none;
     color: white;
     padding: 10px 20px;
     border-radius: 8px;
     cursor: pointer;
     font-weight: 600;
-    box-shadow: 0 0 15px rgba(236, 72, 153, 0.4);
-    transition: all 0.2s;
+    /* Glow removed — delete buttons should feel serious, not theatrical */
+    transition: background var(--transition-fast), transform var(--transition-fast);
 }
 .deleteConfirmBtn:hover {
-    background: #db2777;
+    background: #dc2626;
     transform: translateY(-1px);
 }
 
@@ -222,11 +220,11 @@
 }
 
 .downloadLabel {
-    font-family: "Orbitron", sans-serif;
     font-size: 0.65rem;
     font-weight: 800;
     letter-spacing: 0.5px;
     pointer-events: none;
+    /* Orbitron removed from icon labels */
 }
 
 /* Spinner overlay */
@@ -238,7 +236,7 @@
     height: 100%;
     border-radius: 50%;
     border: 2.5px solid transparent;
-    border-top-color: var(--neon-teal);
+    border-top-color: var(--neon-violet); /* Was neon-teal — brand unified */
     animation: spinBtn 0.7s linear infinite;
     pointer-events: none;
 }
@@ -286,14 +284,13 @@
 
 .completionTooltip h5 {
     margin: 0 0 10px 0;
-    color: var(--neon-blue);
+    color: var(--text-primary); /* Was neon-blue, Orbitron removed */
     font-size: 0.9rem;
     border-bottom: 1px solid var(--holo-border);
     padding-bottom: 6px;
     display: flex;
     justify-content: space-between;
-    font-weight: 600;
-    font-family: "Orbitron", sans-serif;
+    font-weight: 700;
 }
 
 .completionTooltip ul {
@@ -310,15 +307,14 @@
 
 /* --- Skill Section Sub-Headers --- */
 .skillGroupLabel {
-    font-family: "Orbitron", sans-serif;
+    /* Orbitron removed. Uppercase removed. Letter-spacing removed.
+       Section headers in a form are navigation, not branding. */
     font-size: 0.75rem;
     font-weight: 700;
-    color: var(--neon-blue);
+    color: var(--text-secondary);
     margin: 16px 0 8px 0;
     padding-bottom: 4px;
     border-bottom: 1px solid var(--holo-border);
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
 }
 .skillGroupLabel:first-child {
     margin-top: 0;
@@ -328,8 +324,8 @@
 .uploadBtnCover,
 .uploadBtnAvatar {
     position: absolute;
-    background: var(--neon-teal);
-    color: #000;
+    background: var(--neon-violet); /* Was neon-teal + black text — brand unified */
+    color: white;
     border-radius: 50%;
     cursor: pointer;
     display: flex;
@@ -370,7 +366,7 @@
     border-radius: 50%;
     object-fit: cover;
     border: 4px solid var(--holo-bg);
-    box-shadow: 0 0 20px rgba(139, 92, 246, 0.5);
+    /* Glow removed from avatar — profile photos should feel human, not radioactive */
 }
 
 .identitySection {
@@ -391,16 +387,15 @@
 }
 
 .viewName {
-    font-family: "Orbitron", sans-serif;
     font-size: 1.8rem;
     font-weight: 700;
     margin: 0;
     color: var(--text-primary);
     line-height: 1.2;
     word-break: break-word;
+    /* Orbitron removed — names are human identifiers */
 }
 .editName {
-    font-family: "Orbitron", sans-serif;
     font-size: 1.5rem;
     font-weight: 700;
     background: var(--holo-glass);
@@ -410,6 +405,7 @@
     padding: 8px;
     border-radius: 4px;
     margin-bottom: 8px;
+    /* Orbitron removed */
 }
 
 .viewHeadline {
@@ -448,21 +444,21 @@
 
 .editModeBtn {
     background: var(--holo-glass);
-    border: 1px solid var(--neon-teal);
-    color: var(--neon-teal);
+    border: 1px solid var(--neon-violet); /* Was neon-teal — brand unified */
+    color: var(--neon-violet);
 }
 .editModeBtn:hover {
-    background: rgba(15, 255, 198, 0.1);
+    background: rgba(79, 70, 229, 0.08);
 }
 
 .saveModeBtn {
     background: var(--neon-violet);
     border: none;
     color: white;
-    box-shadow: var(--glow-primary);
+    /* Glow removed from save button */
 }
 .saveModeBtn:hover {
-    background: #7c3aed;
+    background: var(--neon-violet-hover);
 }
 
 .metaData {
@@ -475,7 +471,7 @@
     flex-wrap: wrap;
 }
 .linkAction {
-    color: var(--neon-teal);
+    color: var(--neon-violet); /* Was neon-teal — brand unified */
     cursor: pointer;
     font-weight: 600;
 }
@@ -568,9 +564,9 @@
     position: relative;
 }
 .cardTitle {
-    font-family: "Orbitron", sans-serif;
+    font-weight: 700; /* Orbitron removed — card section headers are structure, not branding */
     color: var(--text-primary);
-    font-size: 1.1rem;
+    font-size: 1rem;
     margin-bottom: 16px;
     border-bottom: 1px solid var(--holo-border);
     padding-bottom: 8px;
@@ -600,7 +596,7 @@
 }
 .stackItem label {
     display: block;
-    color: var(--neon-teal);
+    color: var(--text-secondary); /* Was neon-teal — form labels should be calm */
     font-size: 0.8rem;
     margin-bottom: 4px;
     font-weight: 600;
@@ -667,7 +663,7 @@
     outline: none;
 }
 .addSkillBox button {
-    background: var(--neon-teal);
+    background: var(--neon-violet); /* Was neon-teal + black — brand unified */
     border: none;
     border-radius: 6px;
     width: 40px;
@@ -675,7 +671,7 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    color: #000;
+    color: white;
 }
 
 /* --- Timeline Items --- */
@@ -709,8 +705,7 @@
     font-size: 0.9rem;
 }
 .timelineContent small {
-    color: var(--neon-blue);
-    font-family: monospace;
+    color: var(--text-secondary); /* Was neon-blue with monospace — dates are metadata, not code */
     display: block;
     margin: 4px 0;
     font-size: 0.8rem;
@@ -743,8 +738,8 @@
     transition: all 0.2s;
 }
 .actionIconBtn:hover {
-    background: var(--neon-teal);
-    color: #000;
+    background: rgba(79, 70, 229, 0.12); /* Was neon-teal + black — brand unified */
+    color: var(--neon-violet);
 }
 .delBtn:hover {
     background: var(--neon-pink) !important;
@@ -776,8 +771,7 @@
 }
 .projectHeader span {
     font-size: 0.8rem;
-    color: var(--neon-blue);
-    font-family: monospace;
+    color: var(--text-secondary); /* Was neon-blue + monospace — dates are metadata */
 }
 .projectItem p {
     font-size: 0.9rem;
@@ -786,20 +780,21 @@
     line-height: 1.5;
 }
 .projectLink {
-    color: var(--neon-teal);
+    color: var(--neon-violet); /* Was neon-teal — brand unified */
     font-size: 0.85rem;
     text-decoration: none;
-    border: 1px solid var(--neon-teal);
+    border: 1px solid var(--neon-violet);
     padding: 4px 10px;
     border-radius: 4px;
     display: inline-block;
+    transition: all 0.2s;
 }
 .projectLink:hover {
-    background: var(--holo-glass);
+    background: rgba(79, 70, 229, 0.08);
 }
 
 .addBtn {
-    background: var(--neon-teal);
+    background: var(--neon-violet); /* Was neon-teal + glow-teal + black text — brand unified */
     border: none;
     width: 30px;
     height: 30px;
@@ -808,8 +803,9 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    color: #000;
-    box-shadow: var(--glow-teal);
+    color: white;
+    /* Glow removed */
+    transition: background var(--transition-fast);
 }
 
 /* --- Activity (Sidebar Style) --- */
@@ -853,7 +849,7 @@
     margin: 0;
 }
 .readMore {
-    color: var(--neon-teal);
+    color: var(--neon-violet); /* Was neon-teal — brand unified */
     font-size: 0.8rem;
     margin-left: 4px;
     cursor: pointer;
@@ -988,10 +984,9 @@
 .imageModalContent img {
     width: 100%;
     height: 100%;
-    object-fit: contain; /* Ensures HD image isn't cropped */
+    object-fit: contain;
     border-radius: 12px;
-    border: 2px solid var(--neon-teal);
-    box-shadow: 0 0 50px rgba(15, 255, 198, 0.2);
+    border: 2px solid var(--holo-border); /* Was neon-teal border + glow */
     background-color: #000;
 }
 
@@ -1014,9 +1009,10 @@
 }
 
 .closeImageBtn:hover {
-    background: var(--neon-pink);
-    border-color: var(--neon-pink);
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.4);
     transform: scale(1.1);
+    /* Was neon-pink — close buttons should not feel dangerous */
 }
 
 .closeImageBtn svg {

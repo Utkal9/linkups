@@ -34,7 +34,7 @@
     width: 100%;
     height: 100%;
     border-radius: 50%;
-    border: 2px solid var(--neon-teal);
+    border: 2px solid var(--holo-border); /* Was neon-teal — avatars should not glow */
     object-fit: cover;
     cursor: pointer;
 }
@@ -65,19 +65,20 @@
     margin-top: 16px;
 }
 .mediaButton {
-    color: var(--neon-teal);
+    color: var(--text-secondary); /* Was neon-teal — icon buttons are secondary actions */
     cursor: pointer;
     display: flex;
     align-items: center;
     gap: 8px;
-    font-weight: 600;
+    font-weight: 500;
     font-size: 0.9rem;
     padding: 8px 12px;
     border-radius: 8px;
-    transition: background 0.2s;
+    transition: background 0.2s, color 0.2s;
 }
 .mediaButton:hover {
     background: var(--holo-glass);
+    color: var(--text-primary);
 }
 
 .uploadButton {
@@ -85,21 +86,22 @@
     color: white;
     border: none;
     padding: 10px 24px;
-    border-radius: 20px;
+    border-radius: var(--radius-md);
     cursor: pointer;
     font-weight: 600;
-    font-family: "Orbitron", sans-serif;
-    box-shadow: var(--glow-primary);
-    transition: all 0.2s;
+    font-size: 0.9rem;
+    /* Orbitron removed. Glow removed. Pill shape → radius-md.
+       Post button should feel decisive, not theatrical. */
+    transition: background var(--transition-fast), transform var(--transition-fast);
 }
 .uploadButton:hover:not(:disabled) {
-    transform: translateY(-2px);
+    background: var(--neon-violet-hover);
+    transform: translateY(-1px);
 }
 .uploadButton:disabled {
     background: var(--holo-border);
     color: var(--text-secondary);
     cursor: default;
-    box-shadow: none;
 }
 .charCounter {
     text-align: right;
@@ -107,7 +109,7 @@
     color: var(--text-secondary);
     margin-top: 4px;
     margin-right: 4px;
-    font-family: monospace;
+    /* monospace removed — numeric counters don't need terminal font */
 }
 
 /* --- PREVIEW BOX --- */
@@ -167,7 +169,7 @@
 }
 .fileName {
     font-size: 0.8rem;
-    color: var(--neon-teal);
+    color: var(--text-secondary); /* Was neon-teal — filename chip is metadata, not interactive */
     background: var(--holo-glass);
     padding: 2px 6px;
     border-radius: 4px;
@@ -209,14 +211,14 @@
 }
 .postCardUser {
     color: var(--text-primary);
-    font-weight: 700;
+    font-weight: 600;
     margin: 0;
     cursor: pointer;
-    font-family: "Orbitron", sans-serif;
-    letter-spacing: 0.5px;
+    /* Orbitron removed. Letter-spacing removed.
+       Names are human identifiers, not system labels. */
 }
 .postCardUser:hover {
-    color: var(--neon-teal);
+    color: var(--neon-violet); /* Was neon-teal — brand unified */
 }
 .postCardUsername {
     color: var(--text-secondary);
@@ -364,8 +366,8 @@
     border-radius: 50px;
     padding: 8px 12px;
     gap: 8px;
-    border: 1px solid var(--neon-violet);
-    box-shadow: var(--glow-primary);
+    border: 1px solid var(--holo-border);
+    box-shadow: var(--shadow-card); /* Was glow-primary — reaction popup doesn't need a halo */
     animation: popUp 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     z-index: 100;
     white-space: nowrap;
@@ -443,8 +445,9 @@
 }
 .commentModalHeader h3 {
     margin: 0;
-    font-family: "Orbitron", sans-serif;
+    font-weight: 700; /* Orbitron removed — modal titles are navigation, not branding */
     color: var(--text-primary);
+    font-size: 1rem;
 }
 
 .closeModalButton {
@@ -461,9 +464,10 @@
     transition: all 0.2s ease;
 }
 .closeModalButton:hover {
-    background: var(--neon-pink);
-    color: #fff;
+    background: var(--holo-glass);
+    color: var(--text-primary);
     transform: rotate(90deg);
+    /* Was neon-pink: close buttons should not feel dangerous */
 }
 
 /* Edit Modal Specifics */
@@ -544,7 +548,7 @@
     transition: color 0.2s;
 }
 .commentActions span:hover {
-    color: var(--neon-teal);
+    color: var(--neon-violet); /* Was neon-teal — brand unified */
 }
 
 .commentAvatarContainer {
@@ -562,7 +566,7 @@
     right: 0;
     width: 10px;
     height: 10px;
-    background-color: var(--neon-teal);
+    background-color: var(--color-online); /* Was neon-teal — semantic green for presence */
     border: 2px solid var(--holo-bg);
     border-radius: 50%;
     z-index: 2;
@@ -592,15 +596,19 @@
     border-color: var(--neon-blue);
 }
 .commentInputWrapper button {
-    background: var(--neon-teal);
+    background: var(--neon-violet); /* Was neon-teal + black text. Indigo + white = brand consistent */
     border: none;
     padding: 8px 16px;
-    border-radius: 20px;
-    color: #000;
+    border-radius: var(--radius-md);
+    color: white;
     font-weight: 600;
     cursor: pointer;
     white-space: nowrap;
     flex-shrink: 0;
+    transition: background var(--transition-fast);
+}
+.commentInputWrapper button:hover {
+    background: var(--neon-violet-hover);
 }
 
 /* Reaction List Item */
@@ -679,7 +687,7 @@
     padding: 40px;
 }
 .errorMessage {
-    color: var(--neon-pink);
+    color: #ef4444; /* Was neon-pink — semantic error red */
     font-size: 0.85rem;
     text-align: center;
     margin: 5px 0;
@@ -705,13 +713,13 @@
 }
 
 .notificationToast.success {
-    border-color: var(--neon-teal);
-    color: var(--neon-teal);
+    border-color: rgba(16, 185, 129, 0.5); /* Semantic green border */
+    color: var(--color-online);
 }
 
 .notificationToast.error {
-    border-color: var(--neon-pink);
-    color: var(--neon-pink);
+    border-color: rgba(239, 68, 68, 0.4);
+    color: #ef4444; /* Semantic red — was neon-pink */
 }
 
 .notificationToast span {
@@ -744,10 +752,11 @@
 }
 
 .confirmTitle {
-    font-family: "Orbitron", sans-serif;
+    /* Orbitron removed — confirmation dialogs should be clear and calm, not alarming */
+    font-weight: 700;
     color: var(--text-primary);
     margin: 0 0 12px 0;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
 }
 
 .confirmText {
@@ -764,18 +773,18 @@
 }
 
 .deleteConfirmBtn {
-    background: var(--neon-pink);
+    background: #ef4444;
     border: none;
     color: white;
     padding: 10px 20px;
     border-radius: 8px;
     cursor: pointer;
     font-weight: 600;
-    box-shadow: 0 0 15px rgba(236, 72, 153, 0.4);
-    transition: all 0.2s;
+    /* Glow removed — delete actions should feel serious, not theatrical */
+    transition: background var(--transition-fast), transform var(--transition-fast);
 }
 .deleteConfirmBtn:hover {
-    background: #db2777;
+    background: #dc2626;
     transform: translateY(-1px);
 }
 

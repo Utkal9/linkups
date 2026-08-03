@@ -34,29 +34,28 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: var(--holo-glass); /* Adaptive glass background */
-    border: 1px solid var(--neon-teal);
-    color: var(--neon-teal);
+    background: rgba(79, 70, 229, 0.08);
+    border: 1px solid rgba(79, 70, 229, 0.3);
+    color: var(--neon-violet);
     padding: 6px 16px;
     border-radius: 50px;
-    font-family: "Orbitron", sans-serif;
     font-size: 0.8rem;
     margin-bottom: 20px;
-    letter-spacing: 1px;
+    font-weight: 600;
+    letter-spacing: 0;
 }
 
 .pulseDot {
-    width: 8px;
-    height: 8px;
-    background: var(--neon-teal);
+    width: 7px;
+    height: 7px;
+    background: var(--color-online); /* Green — active/live signal */
     border-radius: 50%;
-    box-shadow: 0 0 10px var(--neon-teal);
     animation: pulse 2s infinite;
 }
 
 .heroTitle {
-    font-family: "Orbitron", sans-serif;
-    font-size: 3.8rem;
+    /* Orbitron removed — Plus Jakarta Sans 800 is more authoritative and readable at large sizes */
+    font-size: 3.5rem;
     line-height: 1.1;
     margin-bottom: 20px;
     font-weight: 800;
@@ -64,7 +63,8 @@
 }
 
 .gradientText {
-    background: linear-gradient(90deg, var(--neon-violet), var(--neon-teal));
+    /* Single-brand gradient: indigo → indigo-light */
+    background: linear-gradient(90deg, var(--neon-violet), #818cf8);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -88,20 +88,18 @@
     color: white;
     border: none;
     padding: 14px 32px;
-    border-radius: 8px;
-    font-family: "Orbitron", sans-serif;
+    border-radius: var(--radius-md);
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s;
-    box-shadow: var(--glow-primary);
-    text-transform: uppercase;
-    font-size: 0.9rem;
-    letter-spacing: 0.5px;
+    /* Orbitron removed. Uppercase removed. No glow.
+       Buttons are actions, not identity statements. */
+    transition: background var(--transition-fast), transform var(--transition-fast);
+    font-size: 0.95rem;
 }
 
 .primaryBtn:hover {
-    filter: brightness(1.15); /* Universal hover effect */
-    transform: translateY(-2px);
+    background: var(--neon-violet-hover);
+    transform: translateY(-1px);
 }
 
 .secondaryBtn {
@@ -109,20 +107,18 @@
     border: 1px solid var(--holo-border);
     color: var(--text-primary);
     padding: 14px 32px;
-    border-radius: 8px;
-    font-family: "Orbitron", sans-serif;
-    font-weight: 600;
+    border-radius: var(--radius-md);
+    font-weight: 500;
     cursor: pointer;
-    transition: all 0.3s;
-    text-transform: uppercase;
-    font-size: 0.9rem;
-    letter-spacing: 0.5px;
+    /* Orbitron removed. Uppercase removed. */
+    transition: border-color var(--transition-fast), color var(--transition-fast);
+    font-size: 0.95rem;
 }
 
 .secondaryBtn:hover {
-    border-color: var(--neon-teal);
-    color: var(--neon-teal);
-    background: var(--holo-glass);
+    border-color: var(--neon-violet);
+    color: var(--neon-violet);
+    background: rgba(79, 70, 229, 0.05);
 }
 
 /* --- HOLOGRAM FRAME --- */
@@ -208,51 +204,44 @@
 .cardBottomLeft {
     bottom: 15%;
     left: -30px;
-    border-left: 3px solid var(--neon-teal);
+    border-left: 3px solid var(--neon-violet); /* Unified brand color — was neon-teal */
 }
 
-/* --- MARQUEE --- */
-.marqueeContainer {
+/* --- FEATURE STRIP (replaces tech marquee) --- */
+/* The marquee communicated "look what I know" (portfolio signal).
+   The feature strip communicates "here's what you can do" (product signal). */
+.featureStrip {
     background: var(--holo-panel);
-    padding: 20px 0;
+    padding: 16px 0;
     border-top: 1px solid var(--holo-border);
     border-bottom: 1px solid var(--holo-border);
-    overflow: hidden;
-    white-space: nowrap;
-    position: relative;
-}
-/* Fading edges */
-.marqueeContainer::before,
-.marqueeContainer::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    width: 100px;
-    height: 100%;
-    z-index: 2;
-}
-.marqueeContainer::before {
-    left: 0;
-    background: linear-gradient(to right, var(--holo-panel), transparent);
-}
-.marqueeContainer::after {
-    right: 0;
-    background: linear-gradient(to left, var(--holo-panel), transparent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.marqueeContent {
-    display: inline-block;
-    animation: scroll 30s linear infinite;
+.featureStripItems {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
-.techItem {
-    font-family: "Orbitron", sans-serif;
-    font-weight: 700;
+.featureStripItem {
     color: var(--text-secondary);
-    opacity: 0.5;
+    font-size: 0.875rem;
+    font-weight: 500;
+    padding: 0 32px;
+    letter-spacing: 0;
+}
+
+.featureStripDot {
+    color: var(--text-secondary);
+    opacity: 0.3;
     font-size: 1.2rem;
-    margin: 0 40px;
-    letter-spacing: 2px;
+    line-height: 1;
+    user-select: none;
 }
 
 /* --- FEATURES --- */
@@ -276,11 +265,12 @@
 }
 
 .featureTitle {
-    font-family: "Orbitron", sans-serif;
-    font-size: 2.2rem;
+    /* Orbitron removed — section headings should read, not announce */
+    font-size: 2rem;
+    font-weight: 700;
     margin-bottom: 20px;
     color: var(--text-primary);
-    line-height: 1.2;
+    line-height: 1.25;
 }
 
 .featureDesc {
@@ -431,9 +421,11 @@
     align-items: center;
 }
 .typingText {
-    font-family: monospace;
-    color: var(--neon-teal);
-    font-size: 0.9rem;
+    /* Monospace removed — feed posts are human writing, not terminal output.
+       Neon-teal removed — content text should be legible, not decorative. */
+    color: var(--text-primary);
+    font-size: 0.95rem;
+    line-height: 1.5;
 }
 .mockActions {
     display: flex;
@@ -475,7 +467,7 @@
 .mockChat {
     width: 320px;
     background: var(--holo-panel);
-    border: 1px solid var(--neon-teal);
+    border: 1px solid var(--holo-border); /* Was neon-teal — neutral is more credible */
     border-radius: 20px;
     padding: 20px;
     display: flex;
@@ -494,22 +486,24 @@
 }
 .videoCallBtn {
     margin-top: 10px;
-    background: rgba(236, 72, 153, 0.1);
-    border: 1px solid var(--neon-pink);
+    background: rgba(79, 70, 229, 0.08); /* Was neon-pink — indigo is on-brand */
+    border: 1px solid rgba(79, 70, 229, 0.3);
     color: var(--text-primary);
     padding: 14px;
     border-radius: 12px;
     text-align: center;
-    font-weight: 700;
+    font-weight: 600;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
-    transition: all 0.3s;
+    transition: background var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast);
+    cursor: pointer;
 }
 .videoCallBtn:hover {
-    background: var(--neon-pink);
+    background: var(--neon-violet);
     color: white;
+    border-color: var(--neon-violet);
 }
 .camIcon {
     width: 10px;
@@ -519,15 +513,9 @@
     animation: pulseRed 2s infinite;
 }
 @keyframes pulseRed {
-    0% {
-        opacity: 1;
-    }
-    50% {
-        opacity: 0.5;
-    }
-    100% {
-        opacity: 1;
-    }
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
 }
 
 /* --- STATS --- */
@@ -545,25 +533,25 @@
     border-radius: 16px;
     padding: 30px;
     text-align: center;
-    transition: transform 0.3s;
+    transition: border-color var(--transition-fast), transform var(--transition-fast);
 }
 .statCard:hover {
-    transform: translateY(-5px);
-    border-color: var(--neon-teal);
-    box-shadow: var(--glow-teal);
+    transform: translateY(-4px);
+    border-color: rgba(79, 70, 229, 0.3); /* Subtle indigo tint on hover, no glow */
 }
 .statCard h3 {
-    font-family: "Orbitron";
-    font-size: 2.5rem;
+    /* Orbitron removed. Plus Jakarta Sans 800 for stat numbers. */
+    font-size: 2rem;
+    font-weight: 800;
     color: var(--text-primary);
     margin-bottom: 8px;
+    font-variant-numeric: tabular-nums;
 }
 .statCard p {
-    color: var(--neon-violet);
-    font-weight: 600;
-    text-transform: uppercase;
-    font-size: 0.85rem;
-    letter-spacing: 1px;
+    color: var(--text-secondary);
+    font-weight: 500;
+    font-size: 0.875rem;
+    /* Uppercase and neon-violet removed — labels should be readable */
 }
 
 /* --- DEVELOPER SECTION --- */
@@ -579,18 +567,17 @@
 }
 .sectionTitle {
     text-align: center;
-    font-family: "Orbitron", sans-serif;
-    font-size: 2.5rem;
+    /* Orbitron removed. Uppercase removed. Section headings are orientation, not decoration. */
+    font-size: 2rem;
+    font-weight: 700;
     color: var(--text-primary);
     margin-bottom: 0.5rem;
-    text-transform: uppercase;
-    letter-spacing: 2px;
 }
 .sectionSubtitle {
     text-align: center;
     color: var(--text-secondary);
     margin-bottom: 40px;
-    font-size: 1.1rem;
+    font-size: 1rem;
 }
 .devCard {
     background: var(--holo-panel);
@@ -621,33 +608,32 @@
 }
 .avatarRing {
     position: absolute;
-    top: -8px;
-    left: -8px;
-    right: -8px;
-    bottom: -8px;
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
     border-radius: 50%;
-    border: 2px solid var(--neon-teal);
-    border-top-color: transparent;
-    border-left-color: transparent;
-    animation: spin 6s linear infinite;
+    border: 2px solid rgba(79, 70, 229, 0.4);
+    /* Spin animation removed — a rotating ring is a portfolio template cliché.
+       A static, subtle border is more confident and less distracting. */
     z-index: 1;
 }
 .devInfo {
     flex-grow: 1;
 }
 .devName {
-    font-family: "Orbitron", sans-serif;
-    font-size: 1.8rem;
+    /* Orbitron removed — a person's name is human text */
+    font-size: 1.6rem;
+    font-weight: 700;
     color: var(--text-primary);
     margin: 0;
 }
 .devRole {
-    color: var(--neon-teal);
+    /* Uppercase and neon-teal removed — role is context, not a badge */
+    color: var(--text-secondary);
     font-size: 0.9rem;
-    font-weight: 600;
+    font-weight: 500;
     margin: 4px 0 15px 0;
-    text-transform: uppercase;
-    letter-spacing: 1px;
 }
 .devBio {
     color: var(--text-secondary);
@@ -686,36 +672,37 @@
 .ctaSection {
     text-align: center;
     padding: 120px 20px;
-    /* Uses background variables to ensure light mode has correct white/grey gradient */
     background: linear-gradient(to bottom, var(--holo-bg), var(--holo-panel));
 }
 .ctaSection h2 {
-    font-family: "Orbitron";
-    font-size: 3rem;
-    margin-bottom: 10px;
+    /* Orbitron removed. The CTA headline should feel like an invitation, not a command. */
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 16px;
     color: var(--text-primary);
+    line-height: 1.2;
 }
 .ctaSection p {
     color: var(--text-secondary);
     margin-bottom: 40px;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
 }
 .glowBtn {
-    background: var(--neon-teal);
-    color: #000;
+    background: var(--neon-violet); /* Was neon-teal — unified brand color */
+    color: white;
     border: none;
-    padding: 18px 48px;
-    border-radius: 50px;
-    font-size: 1.1rem;
-    font-weight: 800;
+    padding: 16px 48px;
+    border-radius: var(--radius-md);
+    font-size: 1rem;
+    font-weight: 600;
     cursor: pointer;
-    box-shadow: var(--glow-teal);
-    transition: transform 0.2s;
-    font-family: "Orbitron", sans-serif;
-    letter-spacing: 1px;
+    /* Orbitron removed. Glow removed. Rounded pill removed.
+       Button should feel decisive, not decorative. */
+    transition: background var(--transition-fast), transform var(--transition-fast);
 }
 .glowBtn:hover {
-    transform: scale(1.05);
+    background: var(--neon-violet-hover);
+    transform: translateY(-1px);
 }
 
 /* --- ANIMATIONS --- */

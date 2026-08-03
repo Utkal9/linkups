@@ -28,7 +28,7 @@
     cursor: pointer;
 }
 .backLink:hover {
-    color: var(--neon-teal);
+    color: var(--neon-violet); /* Was neon-teal — brand unified */
 }
 
 /* --- GRID LAYOUT --- */
@@ -67,7 +67,7 @@
 }
 .progressFill {
     height: 100%;
-    background: linear-gradient(90deg, var(--neon-teal), var(--neon-violet));
+    background: linear-gradient(90deg, var(--neon-violet), #818cf8); /* Was neon-teal — brand unified */
     transition: width 0.3s ease;
 }
 
@@ -99,8 +99,8 @@
     cursor: not-allowed;
 }
 .navBtn:hover:not(:disabled) {
-    border-color: var(--neon-teal);
-    color: var(--neon-teal);
+    border-color: var(--neon-violet); /* Was neon-teal — brand unified */
+    color: var(--neon-violet);
 }
 
 .formContent {
@@ -114,11 +114,10 @@
 
 /* --- FORM ELEMENTS --- */
 .sectionTitle {
-    font-family: "Orbitron", sans-serif;
-    font-size: 1.1rem;
+    font-size: 1rem;
+    font-weight: 700; /* Orbitron removed — form section labels are UI structure, not branding */
     color: var(--text-primary);
     margin: 0 0 4px 0;
-    font-weight: 600;
 }
 .sectionDesc {
     font-size: 0.85rem;
@@ -187,8 +186,7 @@
     height: 64px;
     border-radius: 50%;
     object-fit: cover;
-    border: 2px solid var(--neon-teal);
-    box-shadow: 0 0 10px rgba(15, 255, 198, 0.3);
+    border: 2px solid var(--holo-border); /* Was neon-teal + glow — preview image needs no color ring */
 }
 
 .uploadPlaceholder {
@@ -201,7 +199,7 @@
     transition: color 0.2s;
 }
 .uploadPlaceholder:hover {
-    color: var(--neon-teal);
+    color: var(--neon-violet); /* Was neon-teal — brand unified */
 }
 .uploadIconBox {
     width: 50px;
@@ -247,7 +245,7 @@
     transition: background-color 0.2s;
 }
 .toggleInput:checked + .toggleTrack {
-    background-color: var(--neon-teal);
+    background-color: var(--neon-violet); /* Was neon-teal — brand unified */
 }
 .toggleDot {
     position: absolute;
@@ -437,8 +435,8 @@
     color: var(--neon-violet);
 }
 .btnDownload {
-    background: linear-gradient(135deg, var(--neon-teal), #059669);
-    color: #000;
+    background: linear-gradient(135deg, var(--neon-violet), #7c3aed); /* Was neon-teal — download action = primary brand action */
+    color: white;
 }
 
 .resumePaper {

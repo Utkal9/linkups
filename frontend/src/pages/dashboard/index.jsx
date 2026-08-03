@@ -1,5 +1,6 @@
 // frontend/src/pages/dashboard/index.jsx
 import { getAboutUser, getAllUsers } from "@/config/redux/action/authAction";
+import Loader from "@/Components/Loader";
 import {
     createPost,
     deletePost,
@@ -87,11 +88,11 @@ const renderPostBody = (text) => {
                         borderBottom: "1px solid transparent",
                     }}
                     onMouseOver={(e) => {
-                        e.currentTarget.style.color = "var(--neon-teal)";
+                        e.currentTarget.style.color = "var(--neon-violet)";
                         e.currentTarget.style.borderBottom =
-                            "1px solid var(--neon-teal)";
+                            "1px solid var(--neon-violet)";
                         e.currentTarget.style.backgroundColor =
-                            "rgba(15, 255, 198, 0.1)";
+                            "rgba(79, 70, 229, 0.08)";
                     }}
                     onMouseOut={(e) => {
                         e.currentTarget.style.color = "var(--neon-blue)";
@@ -128,7 +129,7 @@ const getReactionColor = (type) => {
         Insightful: "#F1C40F",
         Funny: "#E67E22",
     };
-    return map[type] || "#0fffc6";
+    return map[type] || "var(--neon-violet)"; /* Was #0fffc6 neon-teal — brand unified */
 };
 
 // --- ICONS ---
@@ -145,7 +146,7 @@ const ImageIcon = () => (
     <svg
         viewBox="0 0 24 24"
         fill="currentColor"
-        style={{ color: "#0fffc6" }}
+        style={{ color: "currentColor" }} /* Was #0fffc6 hardcoded neon-teal */
         width="22"
     >
         <path d="M19 4H5C3.9 4 3 4.9 3 6v12c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H5V6h14v12zm-5-7c0-1.66-1.34-3-3-3s-3 1.34-3 3 1.34 3 3 3 3-1.34 3-3z" />
@@ -432,9 +433,9 @@ export default function Dashboard() {
             setPostContent("");
             clearMedia();
             setPostError("");
-            showToast("Transmission Sent Successfully", "success");
+            showToast("Post published", "success");
         } catch (error) {
-            showToast("Transmission Failed", "error");
+            showToast("Failed to publish post", "error");
         }
     };
 
@@ -465,7 +466,7 @@ export default function Dashboard() {
             setEditBody("");
             setEditFile(null);
             setEditFilePreview(null);
-            showToast("Transmission Updated", "success");
+            showToast("Post updated", "success");
         } catch (error) {
             showToast("Update Failed", "error");
         }
@@ -481,7 +482,7 @@ export default function Dashboard() {
             try {
                 await dispatch(deletePost({ post_id: deleteTargetId }));
                 dispatch(getAllPosts());
-                showToast("Transmission Deleted", "success");
+                showToast("Post deleted", "success");
             } catch (error) {
                 showToast("Delete Failed", "error");
             }
@@ -552,7 +553,7 @@ export default function Dashboard() {
     };
 
     if (!authState.user)
-        return <div className={styles.loading}>Initializing...</div>;
+        return <div className={styles.loading}>Loading...</div>;
 
     return (
         <div className={styles.feedContainer}>
@@ -586,7 +587,7 @@ export default function Dashboard() {
                             Confirm Deletion
                         </h3>
                         <p className={styles.confirmText}>
-                            Are you sure you want to delete this transmission?
+                            Are you sure you want to delete this post?
                             This action cannot be undone.
                         </p>
                         <div className={styles.confirmButtons}>
@@ -610,10 +611,10 @@ export default function Dashboard() {
             {filterUsername ? (
                 <div className={styles.filterBanner}>
                     <p>
-                        Viewing data stream from{" "}
+                        Showing posts from{" "}
                         <strong>@{filterUsername}</strong>
                     </p>
-                    <button onClick={clearFilter}>Return to Global Feed</button>
+                    <button onClick={clearFilter}>Back to feed</button>
                 </div>
             ) : (
                 <div className={styles.createPostContainer}>
@@ -638,7 +639,7 @@ export default function Dashboard() {
                                 }}
                                 value={postContent}
                                 className={styles.textAreaOfContent}
-                                placeholder="Initialize new transmission..."
+                            placeholder="What's on your mind?"
                                 maxLength={MAX_CHAR_COUNT}
                             />
                             <div
@@ -700,7 +701,7 @@ export default function Dashboard() {
             <div className={styles.postsContainer}>
                 {displayedPosts.length === 0 && filterUsername ? (
                     <p className={styles.noPosts}>
-                        No activity logs found for this node.
+                        No posts from this user yet.
                     </p>
                 ) : (
                     displayedPosts.map((post) => (
@@ -977,7 +978,7 @@ export default function Dashboard() {
                 {/* Loader sentinel for Infinite Scroll — always rendered so the observer ref is valid */}
                 <div ref={loaderRef} style={{ height: '50px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                     {postState.isLoading && postState.hasMore
-                        ? <span className={styles.loadingText}>Loading more posts...</span>
+                        ? <Loader variant="inline" label="Loading posts..." neutral />
                         : !postState.hasMore
                             ? <span style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', opacity: 0.5 }}>You're all caught up ✓</span>
                             : null

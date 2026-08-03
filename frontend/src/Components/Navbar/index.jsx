@@ -332,7 +332,7 @@ export default function NavbarComponent() {
                             onClick={handleLogout}
                             className={styles.logoutBtn}
                         >
-                            <span>Disconnect</span>
+                            <span>Sign Out</span>
                             <LogoutIcon />
                         </button>
                     </div>

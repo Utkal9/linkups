@@ -17,9 +17,9 @@
 }
 
 .pageTitle {
-    font-family: "Orbitron", sans-serif;
+    font-weight: 700; /* Orbitron removed */
     color: var(--text-primary);
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     margin: 0;
 }
 
@@ -50,13 +50,13 @@
 }
 
 .createCard {
-    border: 2px dashed var(--neon-teal);
-    color: var(--neon-teal);
+    border: 2px dashed var(--neon-violet); /* Was neon-teal — brand unified */
+    color: var(--neon-violet);
 }
 .createCard:hover {
-    background: rgba(15, 255, 198, 0.05);
+    background: rgba(79, 70, 229, 0.05);
     transform: translateY(-5px);
-    box-shadow: 0 0 25px rgba(15, 255, 198, 0.15);
+    /* Glow removed */
 }
 
 /* Resume Item */
@@ -186,9 +186,9 @@
 }
 .modalHeader h3 {
     margin: 0;
-    font-family: "Orbitron", sans-serif;
+    font-weight: 700; /* Orbitron removed */
     color: var(--text-primary);
-    font-size: 1.2rem;
+    font-size: 1.1rem;
 }
 .closeBtn {
     background: none;
@@ -223,25 +223,26 @@
     transition: border-color 0.2s;
 }
 .inputField:focus {
-    border-color: var(--neon-teal);
-    box-shadow: 0 0 15px rgba(15, 255, 198, 0.1);
+    border-color: var(--neon-violet); /* Was neon-teal — brand unified */
+    /* Glow removed */
 }
 
 .primaryBtn {
-    background: var(--neon-teal);
-    color: #000;
+    background: var(--neon-violet); /* Was neon-teal + black + Orbitron */
+    color: white;
     border: none;
     padding: 14px;
     border-radius: 12px;
     font-weight: 700;
     cursor: pointer;
-    font-family: "Orbitron", sans-serif;
-    transition: transform 0.1s;
+    /* Orbitron removed from button label */
+    transition: background var(--transition-fast), transform var(--transition-fast);
     margin-top: 10px;
 }
 .primaryBtn:hover {
+    background: var(--neon-violet-hover);
     transform: scale(1.02);
-    box-shadow: 0 0 15px rgba(15, 255, 198, 0.4);
+    /* Glow removed */
 }
 
 .buttonGroup {
@@ -265,17 +266,18 @@
 }
 
 .dangerBtn {
-    background: var(--neon-pink);
+    background: #ef4444; /* Was neon-pink + glow — semantic danger red */
     border: none;
     color: #fff;
     padding: 10px 24px;
     border-radius: 8px;
     cursor: pointer;
     font-weight: 600;
-    box-shadow: 0 0 15px rgba(236, 72, 153, 0.4);
+    /* Glow removed */
+    transition: background var(--transition-fast), transform var(--transition-fast);
 }
 .dangerBtn:hover {
-    background: #db2777;
+    background: #dc2626;
     transform: translateY(-2px);
 }
 

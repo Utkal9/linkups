@@ -44,8 +44,10 @@
 }
 
 .glassPanel:hover {
-    border-color: var(--neon-violet);
-    box-shadow: 0 10px 30px rgba(139, 92, 246, 0.15);
+    /* Panels are containers, not interactive buttons.
+       Subtle border tint signals hover without implying a click action. */
+    border-color: rgba(79, 70, 229, 0.15);
+    box-shadow: var(--shadow-lg);
 }
 
 /* --- Sticky Sidebar --- */
@@ -131,8 +133,7 @@
     right: 2px;
     width: 20px;
     height: 20px;
-    background-color: var(--neon-teal);
-    /* Border matches card bg to separate from avatar */
+    background-color: var(--color-online); /* Green — universally understood as "online" */
     border: 3px solid var(--holo-panel);
     border-radius: 50%;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
@@ -142,29 +143,31 @@
 
 @keyframes onlinePulse {
     0% {
-        box-shadow: 0 0 0 0 rgba(15, 255, 198, 0.4);
+        box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4); /* Green pulse — matches color-online */
     }
     70% {
-        box-shadow: 0 0 0 6px rgba(15, 255, 198, 0);
+        box-shadow: 0 0 0 6px rgba(34, 197, 94, 0);
     }
     100% {
-        box-shadow: 0 0 0 0 rgba(15, 255, 198, 0);
+        box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
     }
 }
 
 /* User Info Text */
 .userName {
-    font-family: "Orbitron", sans-serif;
+    /* Orbitron removed — Plus Jakarta Sans inherits from body.
+       Names should read as human text, not sci-fi identifiers. */
     color: var(--text-primary);
-    font-size: 1.3rem;
-    font-weight: 600;
+    font-size: 1.2rem;
+    font-weight: 700;
     margin-bottom: 2px;
     cursor: pointer;
-    letter-spacing: 0.5px;
+    letter-spacing: 0;
+    transition: color var(--transition-fast);
 }
 .userName:hover {
-    color: var(--neon-teal);
-    text-shadow: 0 0 10px rgba(15, 255, 198, 0.3);
+    color: var(--neon-violet);
+    /* No text-shadow glow — color change is the hover signal */
 }
 
 .userHandle {
@@ -201,10 +204,11 @@
 }
 
 .statNum {
-    font-family: "Orbitron", sans-serif;
-    font-weight: 700;
+    /* Orbitron removed — Plus Jakarta Sans 800 for numbers */
+    font-weight: 800;
     color: var(--text-primary);
-    font-size: 1.4rem;
+    font-size: 1.5rem;
+    font-variant-numeric: tabular-nums; /* Consistent digit width for statistics */
 }
 
 .statLabel {
@@ -218,39 +222,41 @@
 .holoBtnFull {
     width: 100%;
     background: var(--neon-violet);
-    color: white;
+    color: #fff;
     border: none;
-    padding: 10px;
-    border-radius: 8px;
+    padding: 10px 16px;
+    border-radius: var(--radius-md);
     font-weight: 600;
-    font-size: 0.95rem;
-    transition: all 0.2s;
-    font-family: "Orbitron", sans-serif;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    box-shadow: var(--glow-primary);
+    font-size: 0.9rem;
+    cursor: pointer;
+    /* Orbitron removed. Uppercase removed.
+       "View Profile" is clearer and more natural than "ACCESS PROFILE" */
+    transition: background var(--transition-fast), transform var(--transition-fast);
+    box-shadow: none;
 }
 .holoBtnFull:hover {
-    filter: brightness(1.1);
-    transform: translateY(-2px);
+    background: var(--neon-violet-hover);
+    transform: translateY(-1px);
 }
 
-/* --- Recommendations --- */
+/* --- Section Headers --- */
 .panelTitle {
-    font-family: "Orbitron", sans-serif;
+    /* Orbitron removed. Uppercase removed.
+       Section titles should be readable, not shouted. */
     color: var(--text-primary);
-    font-size: 1rem;
+    font-size: 0.875rem;
+    font-weight: 700;
     margin: 0;
-    letter-spacing: 1px;
-    text-transform: uppercase;
+    letter-spacing: 0;
 }
 
 .livePulse {
-    width: 8px;
-    height: 8px;
-    background-color: var(--neon-teal);
+    width: 7px;
+    height: 7px;
+    background-color: var(--color-online); /* Green — "live" = active/real-time */
     border-radius: 50%;
-    box-shadow: 0 0 8px var(--neon-teal);
+    flex-shrink: 0;
+    /* Opacity pulse is sufficient — no glow needed */
     animation: pulse 2s infinite;
 }
 
@@ -307,7 +313,7 @@
 .plusBtn {
     background: var(--holo-bg);
     border: 1px solid var(--holo-border);
-    color: var(--neon-teal);
+    color: var(--neon-violet); /* Was neon-teal — brand unified */
     width: 32px;
     height: 32px;
     border-radius: 50%;
@@ -319,24 +325,24 @@
 }
 
 .plusBtn:hover {
-    background: var(--neon-teal);
-    border-color: var(--neon-teal);
-    color: #000;
+    background: var(--neon-violet);
+    border-color: var(--neon-violet);
+    color: white; /* Was #000 — white is correct on indigo */
 }
 
 .textLinkBtn {
     background: none;
     border: none;
     color: var(--text-secondary);
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     font-weight: 500;
-    letter-spacing: 1px;
-    text-transform: uppercase;
+    /* Uppercase and letter-spacing removed.
+       "Browse All" is clearer than "EXPAND SEARCH" */
     cursor: pointer;
-    transition: color 0.2s;
+    transition: color var(--transition-fast);
 }
 .textLinkBtn:hover {
-    color: var(--neon-teal);
+    color: var(--neon-violet);
 }
 
 /* Dot for small lists */
@@ -346,7 +352,7 @@
     right: 0;
     width: 10px;
     height: 10px;
-    background-color: var(--neon-teal);
+    background-color: var(--color-online); /* Green — consistent with onlineDot */
     border: 2px solid var(--holo-bg);
     border-radius: 50%;
 }
@@ -371,18 +377,19 @@
     height: 100%;
     border-radius: 50%;
     object-fit: cover;
-    border: 2px solid var(--neon-teal);
+    border: 2px solid var(--holo-border); /* Was neon-teal — avatar borders should be neutral */
 }
 
 .mobileName {
     color: var(--text-primary);
-    font-family: "Orbitron", sans-serif;
+    /* Orbitron removed — names are human text, not identifiers */
     font-size: 1rem;
+    font-weight: 700;
     margin: 0;
 }
 
 .mobileStatus {
-    color: var(--neon-teal);
+    color: var(--text-secondary); /* Was neon-teal — status text is informational, not decorative */
     font-size: 0.8rem;
     margin: 0;
 }

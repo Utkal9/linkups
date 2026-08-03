@@ -1,5 +1,6 @@
 // frontend/src/pages/dashboard/index.jsx
 import { getAboutUser, getAllUsers } from "@/config/redux/action/authAction";
+import Loader from "@/Components/Loader";
 import {
     createPost,
     deletePost,
@@ -977,7 +978,7 @@ export default function Dashboard() {
                 {/* Loader sentinel for Infinite Scroll — always rendered so the observer ref is valid */}
                 <div ref={loaderRef} style={{ height: '50px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                     {postState.isLoading && postState.hasMore
-                        ? <span className={styles.loadingText}>Loading more posts...</span>
+                        ? <Loader variant="inline" label="Loading posts..." neutral />
                         : !postState.hasMore
                             ? <span style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', opacity: 0.5 }}>You're all caught up ✓</span>
                             : null

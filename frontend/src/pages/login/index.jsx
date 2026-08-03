@@ -6,6 +6,7 @@ import { loginUser, registerUser } from "@/config/redux/action/authAction";
 import { emptyMessage } from "@/config/redux/reducer/authReducer";
 import clientServer from "@/config";
 import Head from "next/head";
+import Loader from "@/Components/Loader";
 
 // --- Icons ---
 const GoogleIcon = () => (
@@ -154,18 +155,23 @@ export default function LoginComponent() {
         );
     };
 
-    // Determine what message to show
-    const authMessage =
-        viewState === "forgot"
-            ? forgotMessage
-            : authState.message?.message || authState.message;
+    // Determine message to show and whether it's an error
+    // Priority: forgotMessage > redux authState.message
+    const rawMessage = viewState === "forgot"
+        ? forgotMessage
+        : authState.message?.message || authState.message;
 
+    const authMessage = rawMessage || "";
+
+    // isError: redux flag, but also check message content as fallback
     const isError =
         authState.isError ||
         (authMessage &&
             !authMessage.toLowerCase().includes("success") &&
             !authMessage.toLowerCase().includes("sent") &&
-            !authMessage.toLowerCase().includes("verified"));
+            !authMessage.toLowerCase().includes("verified") &&
+            !authMessage.toLowerCase().includes("registering") &&
+            !authMessage.toLowerCase().includes("knocking"));
 
     return (
         <div className={styles.authPageWrapper}>
@@ -319,9 +325,11 @@ export default function LoginComponent() {
                                         className={styles.btnNeon}
                                         disabled={authState.isLoading}
                                     >
-                                        {authState.isLoading
-                                            ? "Logging in..."
-                                            : "Login"}
+                                        {authState.isLoading ? (
+                                            <Loader variant="inline" label="Signing in..." />
+                                        ) : (
+                                            "Login"
+                                        )}
                                     </button>
                                 </form>
                             )}
@@ -397,9 +405,11 @@ export default function LoginComponent() {
                                         className={styles.btnNeon}
                                         disabled={authState.isLoading}
                                     >
-                                        {authState.isLoading
-                                            ? "Creating Account..."
-                                            : "Sign Up"}
+                                        {authState.isLoading ? (
+                                            <Loader variant="inline" label="Creating account..." />
+                                        ) : (
+                                            "Sign Up"
+                                        )}
                                     </button>
                                 </form>
                             )}

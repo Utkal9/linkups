@@ -120,8 +120,7 @@
     color: var(--neon-violet); /* Primary brand for active state */
 }
 .navLink.active .navIcon {
-    /* Color change is the active indicator — no extra effects */
-}
+    /* inherits color from .navLink.active — no extra styles needed */
 .navLink.active .navLabel {
     font-weight: 600; /* Semibold label reinforces active state */
 }
@@ -296,9 +295,7 @@
     left: 0; /* Align left */
     right: auto;
 }
-.mobileLogo {
-    /* Centered implicitly by flex space-between */
-}
+/* .mobileLogo — centered implicitly by the flex space-between layout */
 
 /* Right Icons Container for Mobile */
 .mobileRightIcons {
@@ -383,7 +380,5 @@
         color: var(--neon-violet); /* Was neon-teal — brand unified */
     }
 
-    .bottomNavActive svg {
-        /* Color change on parent is the active indicator — no glow needed */
-    }
+    /* .bottomNavActive svg — color inherits from parent, no extra styles needed */
 }

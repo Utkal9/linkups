@@ -169,7 +169,7 @@
 }
 .fileName {
     font-size: 0.8rem;
-    color: var(--neon-teal);
+    color: var(--text-secondary); /* Was neon-teal — filename chip is metadata, not interactive */
     background: var(--holo-glass);
     padding: 2px 6px;
     border-radius: 4px;

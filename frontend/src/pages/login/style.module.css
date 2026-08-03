@@ -86,7 +86,7 @@
     background: linear-gradient(
         to bottom,
         transparent 50%,
-        var(--neon-teal) 51%,
+        var(--neon-violet) 51%,
         transparent 52%
     );
     background-size: 100% 10px;

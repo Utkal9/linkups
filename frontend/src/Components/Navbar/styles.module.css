@@ -184,7 +184,7 @@
     transition: border-color 0.2s;
 }
 .profileButton:hover .profilePic {
-    border-color: var(--neon-teal);
+    border-color: var(--neon-violet); /* Was neon-teal — brand unified */
 }
 
 .profileFallback {
@@ -313,7 +313,7 @@
     position: relative;
 }
 .mobileNotif:hover {
-    color: var(--neon-teal);
+    color: var(--neon-violet); /* Was neon-teal — brand unified */
 }
 .mobileNotif .badge {
     top: -5px;
@@ -380,7 +380,7 @@
     }
 
     .bottomNavActive {
-        color: var(--neon-teal);
+        color: var(--neon-violet); /* Was neon-teal — brand unified */
     }
 
     .bottomNavActive svg {

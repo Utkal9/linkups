@@ -161,7 +161,7 @@
     bottom: 8px;
     left: 8px;
     background: rgba(0, 0, 0, 0.6);
-    color: var(--neon-teal);
+    color: var(--text-primary); /* Was neon-teal — overlay labels on video should be neutral white */
     padding: 4px 8px;
     border-radius: 4px;
     font-size: 0.8rem;
@@ -205,8 +205,8 @@
     color: white;
 }
 .screenActive {
-    background: var(--neon-teal);
-    color: #000;
+    background: var(--neon-violet); /* Was neon-teal + black — brand unified */
+    color: white;
 }
 .endCallBtn {
     background: var(--neon-pink);
@@ -221,7 +221,7 @@
     cursor: pointer;
 }
 .chatActive {
-    color: var(--neon-teal);
+    color: var(--neon-violet); /* Was neon-teal — brand unified */
 }
 .badge {
     position: absolute;
@@ -295,7 +295,7 @@
     font-size: 0.7rem;
     font-weight: bold;
     margin-bottom: 2px;
-    color: var(--neon-teal);
+    color: var(--neon-violet); /* Was neon-teal — brand unified */
 }
 .chatInputArea {
     padding: 15px;
@@ -315,7 +315,7 @@
 .sendButton {
     background: none;
     border: none;
-    color: var(--neon-teal);
+    color: var(--neon-violet); /* Was neon-teal — brand unified */
     cursor: pointer;
 }
 
@@ -346,7 +346,7 @@
         z-index: 10;
         border-radius: 12px;
         box-shadow: 0 5px 20px rgba(0, 0, 0, 0.6);
-        border: 2px solid var(--neon-teal);
+        border: 2px solid var(--holo-border); /* Was neon-teal — PiP self-view border should be neutral */
     }
     .groupGrid > .videoTile {
         position: relative !important;

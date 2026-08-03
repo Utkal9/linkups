@@ -164,7 +164,7 @@ const ConnectDemo = () => {
     return (
         <div className={styles.mockChat}>
             <div className={styles.chatBubbleLeft}>
-                Video call from Alex...
+                Incoming Video Request...
             </div>
             <div
                 className={styles.videoCallBtn}

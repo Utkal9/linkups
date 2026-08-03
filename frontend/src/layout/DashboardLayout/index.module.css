@@ -313,7 +313,7 @@
 .plusBtn {
     background: var(--holo-bg);
     border: 1px solid var(--holo-border);
-    color: var(--neon-teal);
+    color: var(--neon-violet); /* Was neon-teal — brand unified */
     width: 32px;
     height: 32px;
     border-radius: 50%;
@@ -325,9 +325,9 @@
 }
 
 .plusBtn:hover {
-    background: var(--neon-teal);
-    border-color: var(--neon-teal);
-    color: #000;
+    background: var(--neon-violet);
+    border-color: var(--neon-violet);
+    color: white; /* Was #000 — white is correct on indigo */
 }
 
 .textLinkBtn {
@@ -377,7 +377,7 @@
     height: 100%;
     border-radius: 50%;
     object-fit: cover;
-    border: 2px solid var(--neon-teal);
+    border: 2px solid var(--holo-border); /* Was neon-teal — avatar borders should be neutral */
 }
 
 .mobileName {
@@ -389,7 +389,7 @@
 }
 
 .mobileStatus {
-    color: var(--neon-teal);
+    color: var(--text-secondary); /* Was neon-teal — status text is informational, not decorative */
     font-size: 0.8rem;
     margin: 0;
 }

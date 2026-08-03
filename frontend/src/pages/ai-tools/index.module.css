@@ -409,9 +409,9 @@
     border: 1px solid;
 }
 .skillTagMatch {
-    background: rgba(15, 255, 198, 0.08);
-    border-color: rgba(15, 255, 198, 0.3);
-    color: var(--neon-teal);
+    background: rgba(79, 70, 229, 0.08); /* Was neon-teal rgba — unified to indigo */
+    border-color: rgba(79, 70, 229, 0.25);
+    color: var(--neon-violet);
 }
 .skillTagMissing {
     background: rgba(236, 72, 153, 0.08);
@@ -619,8 +619,8 @@
     color: var(--neon-blue);
 }
 .badgeBehavioral {
-    background: rgba(15, 255, 198, 0.1);
-    color: var(--neon-teal);
+    background: rgba(79, 70, 229, 0.1); /* Was neon-teal — unified to indigo badge */
+    color: var(--neon-violet);
 }
 .badgeSituational {
     background: rgba(249, 115, 22, 0.12);

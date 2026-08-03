@@ -65,7 +65,7 @@
     border-color: var(--neon-violet); /* Was neon-teal — brand unified */
 }
 .searchWrapper input:focus + svg {
-    color: var(--neon-teal);
+    color: var(--neon-violet); /* Was neon-teal — matches focus border already using neon-violet */
 }
 
 .clearBtn {

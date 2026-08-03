@@ -222,9 +222,9 @@
 }
 
 .joinBtn:hover:not(:disabled) {
-    background: var(--neon-teal);
-    color: #000;
-    box-shadow: var(--glow-teal);
+    background: var(--neon-violet); /* Was neon-teal + black + glow — brand unified */
+    color: white;
+    /* glow-teal removed */
 }
 
 .joinBtn:disabled {

@@ -87,11 +87,24 @@ export default function LoginComponent() {
     }, [router.isReady, router.query]);
 
     useEffect(() => {
-        if (
-            authState.loggedIn ||
-            (typeof window !== "undefined" && localStorage.getItem("token"))
-        ) {
+        if (authState.loggedIn) {
             router.push("/");
+            return;
+        }
+        // Also redirect if a valid (non-expired) token exists in localStorage
+        if (typeof window !== "undefined") {
+            const token = localStorage.getItem("token");
+            const tokenTimestamp = localStorage.getItem("tokenTimestamp");
+            const TWELVE_HOURS = 43200000;
+            const isExpired = !tokenTimestamp || Date.now() - parseInt(tokenTimestamp) > TWELVE_HOURS;
+
+            if (token && !isExpired) {
+                router.push("/");
+            } else if (token && isExpired) {
+                // Clean up expired session silently — let them log in fresh
+                localStorage.removeItem("token");
+                localStorage.removeItem("tokenTimestamp");
+            }
         }
     }, [authState.loggedIn, router]);
 

@@ -184,7 +184,15 @@ export default function NavbarComponent() {
 
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const [hasMounted, setHasMounted] = useState(false);
-    const [isTokenFound, setIsTokenFound] = useState(false);
+
+    // --- FIX: Initialize synchronously from localStorage so the first render
+    // is already correct. Avoids the flash where a logged-in user briefly sees
+    // the "Guest / Login" UI before the useEffect fires, and accidentally
+    // navigates to /login (which then immediately redirects back to /).
+    const [isTokenFound, setIsTokenFound] = useState(() => {
+        if (typeof window === "undefined") return false;
+        return !!localStorage.getItem("token");
+    });
 
     // Combined unread count logic
     const notifUnreadCount = notificationState?.unreadCount || 0;

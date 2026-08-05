@@ -1,7 +1,8 @@
 import Comment from "../models/comments.model.js";
 import Post from "../models/posts.model.js";
 import User from "../models/user.model.js";
-import Notification from "../models/notification.model.js"; // [NEW]
+import Notification from "../models/notification.model.js";
+import { createAndEmitNotification } from "../utils/notificationHelper.js";
 import { v2 as cloudinary } from "cloudinary";
 
 export const activeCheck = async (req, res) => {
@@ -257,39 +258,15 @@ export const toggleReactionOnPost = async (req, res) => {
             // 3. New Reaction -> Add
             post.reactions.push({ userId: userId, type: reactionType });
 
-            // --- NOTIFICATION START ---
             if (post.userId.toString() !== userId.toString()) {
-                const newNotif = new Notification({
+                await createAndEmitNotification(req.io, req.userSocketMap, {
                     recipient: post.userId,
-                    sender: userId,
-                    type: "like",
-                    post: post._id,
-                    message: `reacted to your post`,
+                    sender:    user,
+                    type:      "like",
+                    message:   "reacted to your post.",
+                    post:      post,
                 });
-                await newNotif.save();
-
-                // Real-time Emit
-                const receiverSocketId = req.userSocketMap?.get(
-                    post.userId.toString()
-                );
-                if (receiverSocketId) {
-                    req.io.to(receiverSocketId).emit("new_notification", {
-                        _id: newNotif._id,
-                        recipient: newNotif.recipient,
-                        sender: {
-                            _id: userId,
-                            name: user.name,
-                            profilePicture: user.profilePicture,
-                        },
-                        type: "like",
-                        post: { _id: post._id, body: post.body },
-                        message: newNotif.message,
-                        isRead: false,
-                        createdAt: newNotif.createdAt,
-                    });
-                }
             }
-            // --- NOTIFICATION END ---
         }
 
         await post.save();

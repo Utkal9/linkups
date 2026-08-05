@@ -9,7 +9,7 @@ import React, {
 import { io } from "socket.io-client";
 import { useSelector, useDispatch } from "react-redux";
 import clientServer from "@/config"; // Import API client
-import { addNewNotification } from "@/config/redux/reducer/notificationReducer"; // Import action
+import { addNewNotification, markRead } from "@/config/redux/reducer/notificationReducer"; // Import actions
 
 const SocketContext = createContext(null);
 
@@ -129,6 +129,10 @@ export const SocketProvider = ({ children }) => {
         });
         newSocket.on("new_notification", (notificationData) => {
             dispatch(addNewNotification(notificationData));
+        });
+        // Multi-tab sync: when this user marks a notif read on another tab/device
+        newSocket.on("notification_read", ({ notificationId }) => {
+            dispatch(markRead(notificationId));
         });
 
         return () => {

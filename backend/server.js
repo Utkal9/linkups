@@ -21,6 +21,7 @@ import { registerAIInterviewHandlers } from "./controllers/ai-interview.controll
 import { startMarketAnalyzer } from "./utils/marketAnalyzer.js";
 import avatarInterviewRoutes from "./routes/avatar-interview.routes.js";
 import { registerAvatarInterviewHandlers } from "./controllers/avatar-interview.controller.js";
+import { createAndEmitNotification } from "./utils/notificationHelper.js";
 
 // --- SWAGGER IMPORTS ---
 import swaggerUi from "swagger-ui-express";
@@ -252,18 +253,20 @@ io.on("connection", (socket) => {
             // User is Online -> Ring them
             io.to(toSocketId).emit("incoming-call", { fromUser, roomUrl });
         } else {
-            // User is Offline -> Create Missed Call Notification
-            try {
-                const newNotif = new Notification({
-                    recipient: toUserId,
-                    sender: fromUser._id,
-                    type: "missed_call",
-                    message: "tried to video call you.",
-                });
-                await newNotif.save();
-            } catch (err) {
-                console.error("Error saving offline notification", err);
-            }
+            // User is Offline -> Create Missed Call Notification via helper
+            const callerUser = {
+                _id: fromUser._id,
+                name: fromUser.name,
+                username: fromUser.username,
+                profilePicture: fromUser.profilePicture,
+            };
+            await createAndEmitNotification(io, userSocketMap, {
+                recipient: toUserId,
+                sender:    callerUser,
+                type:      "missed_call",
+                message:   "tried to video call you.",
+                priority:  "warning",
+            });
         }
     });
 

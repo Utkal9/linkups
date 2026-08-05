@@ -3,7 +3,8 @@ import Profile from "../models/profile.model.js";
 import Post from "../models/posts.model.js";
 import Comment from "../models/comments.model.js";
 import Message from "../models/message.model.js";
-import Notification from "../models/notification.model.js"; // [NEW]
+import Notification from "../models/notification.model.js";
+import { createAndEmitNotification } from "../utils/notificationHelper.js";
 import bcrypt from "bcrypt";
 import crypto from "crypto";
 import ConnectionRequest from "../models/connections.model.js";
@@ -1084,33 +1085,13 @@ export const sendConnectionRequest = async (req, res) => {
         });
         await request.save();
 
-        // --- NOTIFICATION START ---
-        const newNotif = new Notification({
+        // Notify the connection recipient
+        await createAndEmitNotification(req.io, req.userSocketMap, {
             recipient: connectionUser._id,
-            sender: user._id,
-            type: "connection_request",
-            message: "sent you a connection request.",
+            sender:    user,
+            type:      "connection_request",
+            message:   "sent you a connection request.",
         });
-        await newNotif.save();
-
-        const receiverSocketId = req.userSocketMap?.get(
-            connectionUser._id.toString()
-        );
-        if (receiverSocketId) {
-            req.io.to(receiverSocketId).emit("new_notification", {
-                _id: newNotif._id,
-                recipient: newNotif.recipient,
-                sender: {
-                    _id: user._id,
-                    name: user.name,
-                    profilePicture: user.profilePicture,
-                },
-                type: "connection_request",
-                message: newNotif.message,
-                isRead: false,
-                createdAt: newNotif.createdAt,
-            });
-        }
         // --- NOTIFICATION END ---
 
         return res.json({ message: "Request Sent" });
@@ -1170,33 +1151,13 @@ export const acceptConnectionRequest = async (req, res) => {
             connection.status_accepted = true;
             await connection.save();
 
-            // --- NOTIFICATION START ---
-            const newNotif = new Notification({
-                recipient: connection.userId, // The person who sent the request
-                sender: user._id, // Me (The acceptor)
-                type: "connection_accepted",
-                message: "accepted your connection request.",
+            // Notify the person whose request was accepted
+            await createAndEmitNotification(req.io, req.userSocketMap, {
+                recipient: connection.userId,
+                sender:    user,
+                type:      "connection_accepted",
+                message:   "accepted your connection request.",
             });
-            await newNotif.save();
-
-            const receiverSocketId = req.userSocketMap?.get(
-                connection.userId.toString()
-            );
-            if (receiverSocketId) {
-                req.io.to(receiverSocketId).emit("new_notification", {
-                    _id: newNotif._id,
-                    recipient: newNotif.recipient,
-                    sender: {
-                        _id: user._id,
-                        name: user.name,
-                        profilePicture: user.profilePicture,
-                    },
-                    type: "connection_accepted",
-                    message: newNotif.message,
-                    isRead: false,
-                    createdAt: newNotif.createdAt,
-                });
-            }
             // --- NOTIFICATION END ---
 
             return res.json({ message: "Request Accepted" });
@@ -1227,36 +1188,14 @@ export const commentPost = async (req, res) => {
         });
         await comment.save();
 
-        // --- NOTIFICATION START ---
         if (post.userId.toString() !== user._id.toString()) {
-            const newNotif = new Notification({
+            await createAndEmitNotification(req.io, req.userSocketMap, {
                 recipient: post.userId,
-                sender: user._id,
-                type: "comment",
-                post: post._id,
-                message: "commented on your post.",
+                sender:    user,
+                type:      "comment",
+                message:   "commented on your post.",
+                post:      post,
             });
-            await newNotif.save();
-
-            const receiverSocketId = req.userSocketMap?.get(
-                post.userId.toString()
-            );
-            if (receiverSocketId) {
-                req.io.to(receiverSocketId).emit("new_notification", {
-                    _id: newNotif._id,
-                    recipient: newNotif.recipient,
-                    sender: {
-                        _id: user._id,
-                        name: user.name,
-                        profilePicture: user.profilePicture,
-                    },
-                    type: "comment",
-                    post: { _id: post._id, body: post.body },
-                    message: newNotif.message,
-                    isRead: false,
-                    createdAt: newNotif.createdAt,
-                });
-            }
         }
         // --- NOTIFICATION END ---
 

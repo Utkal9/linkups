@@ -33,6 +33,23 @@ const PAGE_SIZE = 15;
 // Async Thunks
 // ─────────────────────────────────────────────────────────────────────────────
 
+/** Lightweight fetch — just the integer badge count. Called on app mount. */
+export const fetchUnreadCount = createAsyncThunk(
+    "notification/fetchUnreadCount",
+    async (_, thunkAPI) => {
+        try {
+            const token = localStorage.getItem("token");
+            if (!token) return 0;
+            const response = await clientServer.get("/notifications/unread_count", {
+                params: { token },
+            });
+            return response.data.count ?? 0;
+        } catch {
+            return 0; // Badge failing silently is acceptable
+        }
+    }
+);
+
 /**
  * Initial fetch or filter/search change — replaces the list.
  * Reads filter + searchQuery from current state if not provided.
@@ -233,6 +250,13 @@ const notificationSlice = createSlice({
         },
     },
     extraReducers: (builder) => {
+        // ── fetchUnreadCount (lightweight badge-only) ────────────────────
+        builder
+            .addCase(fetchUnreadCount.fulfilled, (state, action) => {
+                // Only update if the full list hasn't set a more accurate number
+                state.unreadCount = action.payload;
+            });
+
         // ── fetchNotifications ──────────────────────────────────────────────
         builder
             .addCase(fetchNotifications.pending, (state) => {

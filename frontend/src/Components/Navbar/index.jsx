@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { reset, setTokenIsThere } from "@/config/redux/reducer/authReducer";
 import { getAboutUser } from "@/config/redux/action/authAction";
+import { fetchUnreadCount } from "@/config/redux/reducer/notificationReducer";
 import { motion, AnimatePresence } from "framer-motion";
 import { useSocket } from "@/context/SocketContext";
 import { useTheme } from "@/context/ThemeContext";
@@ -209,6 +210,9 @@ export default function NavbarComponent() {
             if (!authState.profileFetched) {
                 dispatch(getAboutUser({ token }));
             }
+            // Fetch unread count immediately so the bell badge is correct
+            // from the first render — no need to visit /notifications first.
+            dispatch(fetchUnreadCount());
         } else {
             setIsTokenFound(false);
         }
